@@ -210,6 +210,9 @@ function ReactLibrary.Create(ClassName : string, Properties : {any}, CreationCal
         local Object = Instance.new(ClassName)
         Properties = Properties and Properties or {}
 
+        local ParentValue = Properties["Parent"]
+        Properties["Parent"] = nil
+       
         for Property, PropertyValue in Properties do
             if Property == "Attributes" then
                 for Attribute, AttributeValue in PropertyValue do
@@ -240,6 +243,8 @@ function ReactLibrary.Create(ClassName : string, Properties : {any}, CreationCal
                 Object[Property] = PropertyValue
             end
         end
+
+        Object.Parent = ParentValue
     end)
 
     if Succeeded then
@@ -263,6 +268,9 @@ end
 function ReactLibrary.ApplyProperties(Object : Object, Properties : {any})
     local Succeeded, Result = pcall(function()
         Properties = Properties and Properties or {}
+
+        local ParentValue = Properties["Parent"]
+        Properties["Parent"] = nil
 
         for Property, PropertyValue in Properties do
             if Property == "Attributes" then
@@ -294,6 +302,8 @@ function ReactLibrary.ApplyProperties(Object : Object, Properties : {any})
                 Object[Property] = PropertyValue
             end
         end
+
+        Object.Parent = ParentValue
     end)
 
     if not Succeeded then
