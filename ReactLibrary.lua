@@ -24,27 +24,35 @@ local ReactLibrary = {
             local PoolContainer = rawget(self, "Pool")
             table.insert(PoolContainer, Object)
         end
-    })
+    }),
 
     Services = setmetatable({
         ServiceContainer = {}
     }, {
         __call = function(self, ServiceName : string)
             local ServiceContainer = rawget(self, "ServiceContainer")
-            
-            local Service = game:GetService(ServiceName)
-            ServiceContainer[ServiceName] = Service
+            local CloneReferenceSuccess, Result = pcall(function()
+                return game:GetService(ServiceName)
+            end)
+
+            if CloneReferenceSuccess then
+                ServiceContainer[ServiceName] = Result
+            else
+                ServiceContainer[ServiceName] = Result
+                --return cloneref(game:GetService("Players"))
+            end
         end,
 
         __index = function(self, ServiceName : string)
             local ServiceContainer = rawget(self, "ServiceContainer")
-
             return ServiceContainer[ServiceName]
         end
     })
 }
 
-ReactLibrary.Services("HttpService")
+local Placeholder = function(...)
+    return ...
+end
 
 do
     local Succeeded, Result = pcall(function()
@@ -63,17 +71,7 @@ do
                 return
             end
 
-            return HookMethod(self, ...)
-        end)
-
-        OldIndex = hookmeta(game, "__index", function(self, key)
-            if key == "Kick" then
-                return
-            elseif Method == "GetLogHistory" then
-                return
-            end
-
-            return OldIndex(self, key)
+            return OldFunction(self, ...)
         end)
     end)
 
@@ -87,60 +85,66 @@ do
     end
 end
 
-local SignalLibrary = PsmSignal.new() or do
-    local Signal = {}
-    Signal.__index = Signal
+local SignalLibrary do
+    ReactLibrary.Services("HttpService")
 
-    function Signal.new()
-        local self = setmetatable({
-            Callbacks = {}
-        }, Signal)
+    if PsmSignal then
+        SignalLibrary = PsmSignal
+    else
+        SignalLibrary = {}
+        SignalLibrary.__index = SignalLibrary
 
-        return self
-    end
+        function SignalLibrary.new()
+            local self = setmetatable({
+                Callbacks = {}
+            }, SignalLibrary)
 
-    function Signal:Connect(Callback : any)
-        table.insert(self.Callbacks, {
-            Callback = Callback,
-            CallbackType = "Connect",
-            CallbackId = ReactLibrary.HttpService:GenerateGUID(false)
-        })
-    end
+            return self
+        end
 
-    function Signal:Once(Callback : any)
-        table.insert(self.Callbacks, {
-            Callback = Callback,
-            CallbackType = "Once",
-            CallbackId = ReactLibrary.HttpService:GenerateGUID(false)
-        })
-    end
+        function SignalLibrary:Connect(Callback : any)
+            table.insert(self.Callbacks, {
+                Callback = Callback,
+                CallbackType = "Connect",
+                CallbackId = ReactLibrary.HttpService:GenerateGUID(false)
+            })
+        end
 
-    function Signal:Fire(Arguments : {any})
-        local CleanedIndexs = {}
+        function SignalLibrary:Once(Callback : any)
+            table.insert(self.Callbacks, {
+                Callback = Callback,
+                CallbackType = "Once",
+                CallbackId = ReactLibrary.HttpService:GenerateGUID(false)
+            })
+        end
 
-        for Index, CallbackData in ipairs(self.Callbacks) do
-            if type(CallbackData) == "table" and type(CallbackData.Callback) == "function" then
-                CallbackData.Callback(Arguments)
+        function SignalLibrary:Fire(Arguments : {any})
+            local CleanedIndexs = {}
 
-                if CallbackData.CallbackType == "Once" then
-                    table.insert(CleanedIndexs, Index)
+            for Index, CallbackData in ipairs(self.Callbacks) do
+                if type(CallbackData) == "table" and type(CallbackData.Callback) == "function" then
+                    CallbackData.Callback(Arguments)
+
+                    if CallbackData.CallbackType == "Once" then
+                        table.insert(CleanedIndexs, Index)
+                    end
                 end
             end
-        end
-        
-        for Index = #CleanedIndexs, 1, -1 do
-            local CleanedIndex = CleanedIndexs[Index]
-            table.remove(self.Callbacks, CleanedIndex)
-        end
-    end
-
-    function Signal:Destroy()
-        if self.Callbacks then
-            table.clear(self.Callbacks)
+            
+            for Index = #CleanedIndexs, 1, -1 do
+                local CleanedIndex = CleanedIndexs[Index]
+                table.remove(self.Callbacks, CleanedIndex)
+            end
         end
 
-        table.clear(self)
-        setmetatable(self, nil)
+        function SignalLibrary:Destroy()
+            if self.Callbacks then
+                table.clear(self.Callbacks)
+            end
+
+            table.clear(self)
+            setmetatable(self, nil)
+        end
     end
 end
 
@@ -170,7 +174,7 @@ ReactLibrary.Signals = setmetatable({
 
             CustomSignals[IndexName] = {
                 SignalCallback = SignalCallback,
-                SignalId = ReactLibrary.HttpService:GenerateGUID(false)
+                SignalId = ReactLibrary.Services.HttpService:GenerateGUID(false)
             }
         end
     end
