@@ -259,6 +259,8 @@ end
 
 function ReactLibrary.ApplyProperties(Object : Object, Properties : {any})
     local Succeeded, Result = pcall(function()
+        Properties = Properties and Properties or {}
+        
         for Property, PropertyValue in Properties do
             if Property == "Attributes" then
                 for Attribute, AttributeValue in PropertyValue do
