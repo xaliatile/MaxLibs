@@ -208,6 +208,7 @@ end
 function ReactLibrary.Create(ClassName : string, Properties : {any}, CreationCallback : any)
     local Succeeded, Result = pcall(function()
         local Object = Instance.new(ClassName)
+        Properties = Properties and Properties or {}
 
         for Property, PropertyValue in Properties do
             if Property == "Attributes" then
@@ -242,7 +243,9 @@ function ReactLibrary.Create(ClassName : string, Properties : {any}, CreationCal
     end)
 
     if Succeeded then
-        CreationCallback(Result, Succeeded)
+        if CreationCallback then
+            CreationCallback(Result, Succeeded)
+        end
     else
         if not Succeeded then
             warn(
@@ -260,7 +263,7 @@ end
 function ReactLibrary.ApplyProperties(Object : Object, Properties : {any})
     local Succeeded, Result = pcall(function()
         Properties = Properties and Properties or {}
-        
+
         for Property, PropertyValue in Properties do
             if Property == "Attributes" then
                 for Attribute, AttributeValue in PropertyValue do
