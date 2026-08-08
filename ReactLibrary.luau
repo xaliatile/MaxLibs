@@ -1,5 +1,6 @@
 local ReactLibrary = {
     Signals = {},
+    UserInterface = {},
     ReactPool = setmetatable({
         Pool = {}
     }, {
@@ -44,6 +45,47 @@ local ReactLibrary = {
 }
 
 ReactLibrary.Services("HttpService")
+
+do
+    local Succeeded, Result = pcall(function()
+        -- your welcome prevents skiddy devs from kicking you locally.
+
+        local hookmeta = hookmetamethod and hookmetamethod or function(...) return ... end
+        local OldFunction = nil
+        local OldIndex = nil
+
+        OldFunction = hookmeta(game, "__namecall", function(self, ...)
+            local Method = getnamecallmethod()
+
+            if Method == "Kick" then
+                return
+            elseif Method == "GetLogHistory" then
+                return
+            end
+
+            return HookMethod(self, ...)
+        end)
+
+        OldIndex = hookmeta(game, "__index", function(self, key)
+            if key == "Kick" then
+                return
+            elseif Method == "GetLogHistory" then
+                return
+            end
+
+            return OldIndex(self, key)
+        end)
+    end)
+
+    if not Succeeded then
+         warn(
+            string.format(
+                "[REACT LIB :: Library]: Caught an exception in safe call | %s",
+                tostring(Result)
+            )
+        )
+    end
+end
 
 local SignalLibrary = PsmSignal.new() or do
     local Signal = {}
@@ -211,7 +253,7 @@ function ReactLibrary.Create(ClassName : string, Properties : {any}, CreationCal
     return Result
 end
 
-function ReactLibrary.Apply(Object : Object, Properties : {any})
+function ReactLibrary.ApplyProperties(Object : Object, Properties : {any})
     local Succeeded, Result = pcall(function()
         for Property, PropertyValue in Properties do
             if Property == "Attributes" then
@@ -317,3 +359,5 @@ function ReactLibrary.Exit()
 
     ReactLibrary = nil
 end
+
+return ReactLibrary
