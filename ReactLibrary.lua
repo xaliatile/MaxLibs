@@ -243,6 +243,8 @@ function __react.Create(__className : string, __propers : {any}, __creationCallb
         end
 
         __obj.Parent = __parValue
+
+        return __obj
     end)
 
     if __succ then
@@ -288,13 +290,14 @@ function __react.ApplyProperties(__obj : Object, __propers : {any})
                     local __signalConnectionType = rawget(__signalData, "SignalConnectionType")
 
                     local __RS = __obj[__signalName]
+                    local __RC = nil
 
                     if typeof(__RS) == "RBXScriptSignal" then
                         if __signalConnectionType == "Once" then
-                            local __RC = __RS:Once(Callback)
+                            __RC = __RS:Once(Callback)
                             __react.__reactpool[__RC] = __RC
                         else
-                            local __RC = __RS:Connect(Callback)
+                            __RC = __RS:Connect(Callback)
                             __react.__reactpool[__RC] = __RC
                         end
                     end
@@ -341,6 +344,8 @@ function __react.ConnectReact(__obj : Object, __signalData : {any}, __callback :
                 __RS:Connect(__callback)
             end
         end
+
+        return __RS
     end)
 
     if not __succ then
@@ -358,7 +363,7 @@ end
 function __react.ConnectCustomReact(__signalData : {any})
     local __succ, __result = pcall(function()
         local __signalName = rawget(__signalData, "SignalName")
-        __react.__signals(__signalName)
+        return __react.__signals(__signalName)
     end)
 
     if not __succ then
