@@ -1,3 +1,5 @@
+-- Made by Max
+
 local __react = {
     __signals = {},
     __reactpool = setmetatable({
