@@ -47,7 +47,43 @@ local __react = {
             local __servicesContainer = rawget(self, "__servicesContainer")
             return __servicesContainer[__serviceName]
         end
-    })
+    }),
+
+    __runners = {
+        __getRepository = function(__repoLink : string)
+            local __succ, __result = pcall(function()
+                local __repo = game:HttpGet(__repoLink)
+                return loadstring(__repo)()
+            end)
+
+            return __result, __succ
+        end,
+
+        __runIf = function(__callback : any, __statement : any)
+            local __succ, __result = false, ""
+
+            if __statement then
+                __succ, __result = pcall(__callback)
+            end
+
+            return __result, __succ
+        end,
+
+        __runPr = function(__callback : any, __cTag : string)
+            local __succ, __result = pcall(__callback)
+
+            if not __succ then
+                warn(
+                    string.format(
+                        "[MAX REACT | External Error (%s) ]: %s experienced an internal error and was handled safely | Error: %s", 
+                        __cTag,
+                        __cTag
+                        __result
+                    )
+                )
+            end
+        end
+    }
 }
 
 local __signalLib do
@@ -113,37 +149,36 @@ local __signalLib do
     end
 end
 
-__react.__signals = setmetatable({
-    __customSignals = {}
-}, {
-    __call = function(self, __callname : string, __calldata : {any})
-        local __customSignals = rawget(self, "__customSignals")
+do
+    __react.__signals = setmetatable({
+        __customSignals = {}
+    }, {
+        __call = function(self, __callname : string, __calldata : {any})
+            local __customSignals = rawget(self, "__customSignals")
 
-        if __customSignals[__callname] then
-            local __signalData = __customSignals[__callname]
-            local __callback = rawget(__signalData, "SignalCallback")
+            if __customSignals[__callname] then
+                local __signalData = __customSignals[__callname]
+                local __callback = rawget(__signalData, "SignalCallback")
 
-            if type(__callback) == "function" then
-                __callback(__calldata)
+                if type(__callback) == "function" then
+                    __callback(__calldata)
+                end
+            end
+        end,
+
+        __newindex = function(self, IndexName : string, IndexData : {any})
+            local __customSignals = rawget(self, "__customSignals")
+
+            if type(IndexData) == "table" and not __customSignals[IndexName] then
+                local __signalCallback = rawget(IndexData, "__signalCallback") or function(...) return ... end
+
+                __customSignals[IndexName] = {
+                    __signalCallback = __signalCallback,
+                    __signalId = __react.__services.HttpService:GenerateGUID(false)
+                }
             end
         end
-    end,
-
-    __newindex = function(self, IndexName : string, IndexData : {any})
-        local __customSignals = rawget(self, "__customSignals")
-
-        if type(IndexData) == "table" and not __customSignals[IndexName] then
-            local __signalCallback = rawget(IndexData, "__signalCallback") or function(...) return ... end
-
-            __customSignals[IndexName] = {
-                __signalCallback = __signalCallback,
-                __signalId = __react.__services.HttpService:GenerateGUID(false)
-            }
-        end
-    end
-})
-
-do
+    })
     __react.__signals["DestroyingReliable"] = {
         __signalCallback = function(__calldata : {any})
             local __obj = rawget(__calldata or {}, "__obj")
