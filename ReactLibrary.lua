@@ -1,145 +1,108 @@
-local ReactLibrary = {
-    Signals = {},
-    UserInterface = {},
-    ReactPool = setmetatable({
-        Pool = {}
+local __react = {
+    __signals = {},
+    __reactpool = setmetatable({
+        __pool = {}
     }, {
-        __call = function(self, ServiceName : string)
-            local PoolContainer = rawget(self, "Pool")
+        __call = function(self)
+            local __pool = rawget(self, "__pool")
 
-            for _, Entry in ipairs(PoolContainer) do
-                if typeof(Entry) == "RBXScriptConnection" then
-                    Entry:Disconnect()
-                elseif type(Entry) == "table" then
-                    table.clear(Entry)
-                elseif typeof(Entry) == "Instance" then
-                    Entry:Destroy()
+            for _, poolEntry in ipairs(__pool) do
+                if typeof(poolEntry) == "RBXScriptConnection" then
+                    poolEntry:Disconnect()
+                elseif type(poolEntry) == "table" then
+                    table.clear(poolEntry)
+                elseif typeof(poolEntry) == "Instance" then
+                    poolEntry:Destroy()
                 end
             end
 
-            table.clear(PoolContainer)
+            table.clear(__pool)
         end,
 
-        __newindex = function(self, _, Object : Object)
-            local PoolContainer = rawget(self, "Pool")
-            table.insert(PoolContainer, Object)
+        __newindex = function(self, _, __obj : Object)
+            local __pool = rawget(self, "__pool")
+            table.insert(__pool, __obj)
         end
     }),
 
-    Services = setmetatable({
-        ServiceContainer = {}
+    __services = setmetatable({
+        __servicesContainer = {}
     }, {
-        __call = function(self, ServiceName : string)
-            local ServiceContainer = rawget(self, "ServiceContainer")
-            local CloneReferenceSuccess, Result = pcall(function()
-                return game:GetService(ServiceName)
+        __call = function(self, __serviceName : string)
+            local __servicesContainer = rawget(self, "__servicesContainer")
+            local __succeeded, __result = pcall(function()
+                return game:GetService(__serviceName)
             end)
 
-            if CloneReferenceSuccess then
-                ServiceContainer[ServiceName] = Result
+            if __succeeded then
+                __servicesContainer[__serviceName] = __result
             else
-                ServiceContainer[ServiceName] = Result
-                --return cloneref(game:GetService("Players"))
+                __servicesContainer[__serviceName] = __result
             end
         end,
 
-        __index = function(self, ServiceName : string)
-            local ServiceContainer = rawget(self, "ServiceContainer")
-            return ServiceContainer[ServiceName]
+        __index = function(self, __serviceName : string)
+            local __servicesContainer = rawget(self, "__servicesContainer")
+            return __servicesContainer[__serviceName]
         end
     })
 }
 
-local Placeholder = function(...)
-    return ...
-end
-
-do
-    local Succeeded, Result = pcall(function()
-        -- your welcome prevents skiddy devs from kicking you locally.
-
-        local hookmeta = hookmetamethod and hookmetamethod or function(...) return ... end
-        local OldFunction = nil
-        local OldIndex = nil
-
-        OldFunction = hookmeta(game, "__namecall", function(self, ...)
-            local Method = getnamecallmethod()
-
-            if Method == "Kick" then
-                return
-            elseif Method == "GetLogHistory" then
-                return
-            end
-
-            return OldFunction(self, ...)
-        end)
-    end)
-
-    if not Succeeded then
-         warn(
-            string.format(
-                "[REACT LIB :: Library]: Caught an exception in safe call | %s",
-                tostring(Result)
-            )
-        )
-    end
-end
-
-local SignalLibrary do
-    ReactLibrary.Services("HttpService")
+local __signalLib do
+    __react.__services("HttpService")
 
     if PsmSignal then
-        SignalLibrary = PsmSignal
+        __signalLib = PsmSignal
     else
-        SignalLibrary = {}
-        SignalLibrary.__index = SignalLibrary
+        __signalLib = {}
+        __signalLib.__index = __signalLib
 
-        function SignalLibrary.new()
+        function __signalLib.new()
             local self = setmetatable({
-                Callbacks = {}
-            }, SignalLibrary)
+                __signalCallbacks = {}
+            }, __signalLib)
 
             return self
         end
 
-        function SignalLibrary:Connect(Callback : any)
-            table.insert(self.Callbacks, {
-                Callback = Callback,
-                CallbackType = "Connect",
-                CallbackId = ReactLibrary.HttpService:GenerateGUID(false)
+        function __signalLib:Connect(__callback : any)
+            table.insert(self.__signalCallbacks, {
+                __callback = __callback,
+                __callbackType = "Connect",
+                __callbackId = ReactLibrary.HttpService:GenerateGUID(false)
             })
         end
 
-        function SignalLibrary:Once(Callback : any)
-            table.insert(self.Callbacks, {
-                Callback = Callback,
-                CallbackType = "Once",
-                CallbackId = ReactLibrary.HttpService:GenerateGUID(false)
+        function __signalLib:Once(__callback : any)
+            table.insert(self.__signalCallbacks, {
+                __callback = __callback,
+                __callbackType = "Once",
+                __callbackId = ReactLibrary.HttpService:GenerateGUID(false)
             })
         end
 
-        function SignalLibrary:Fire(Arguments : {any})
-            local CleanedIndexs = {}
+        function __signalLib:Fire(__args : {any})
+            local __cleanedindxs = {}
 
-            for Index, CallbackData in ipairs(self.Callbacks) do
-                if type(CallbackData) == "table" and type(CallbackData.Callback) == "function" then
-                    CallbackData.Callback(Arguments)
+            for __indx, __calldata in ipairs(self.__signalCallbacks) do
+                if type(__calldata) == "table" and type(__calldata.__callback) == "function" then
+                    __calldata.__callback(__args)
 
-                    if CallbackData.CallbackType == "Once" then
-                        table.insert(CleanedIndexs, Index)
+                    if __calldata.__callbackType == "Once" then
+                        table.insert(__cleanedindxs, __indx)
                     end
                 end
             end
             
-            for Index = #CleanedIndexs, 1, -1 do
-                local CleanedIndex = CleanedIndexs[Index]
-                table.remove(self.Callbacks, CleanedIndex)
+            for __indx = #__cleanedindxs, 1, -1 do
+                local _cleanedindx = __cleanedindxs[__indx]
+                table.remove(self.__signalCallbacks, _cleanedindx)
             end
         end
 
-        function SignalLibrary:Destroy()
-            if self.Callbacks then
-                table.clear(self.Callbacks)
+        function __signalLib:Destroy()
+            if self.__signalCallbacks then
+                table.clear(self.__signalCallbacks)
             end
 
             table.clear(self)
@@ -148,235 +111,250 @@ local SignalLibrary do
     end
 end
 
-ReactLibrary.Signals = setmetatable({
-    CustomSignals = {}
+__react.__signals = setmetatable({
+    __customSignals = {}
 }, {
-    __call = function(self, CallName : string, CallData : {any})
-        local CustomSignals = rawget(self, "CustomSignals")
+    __call = function(self, __callname : string, __calldata : {any})
+        local __customSignals = rawget(self, "__customSignals")
 
-        if CustomSignals[CallName] then
-            local SignalData = CustomSignals[CallName]
+        if __customSignals[__callname] then
+            local __signalData = __customSignals[__callname]
+            local __callback = rawget(__signalData, "SignalCallback")
 
-            local Callback = rawget(SignalData, "SignalCallback")
-            local CallbackArgument = rawget(SignalData, "SignalArguments")
-
-            if type(Callback) == "function" then
-                Callback(CallData)
+            if type(__callback) == "function" then
+                __callback(__calldata)
             end
         end
     end,
 
     __newindex = function(self, IndexName : string, IndexData : {any})
-        local CustomSignals = rawget(self, "CustomSignals")
+        local __customSignals = rawget(self, "__customSignals")
 
-        if type(IndexData) == "table" and not CustomSignals[IndexName] then
-            local SignalCallback = rawget(IndexData, "SignalCallback") or function(...) return ... end
+        if type(IndexData) == "table" and not __customSignals[IndexName] then
+            local __signalCallback = rawget(IndexData, "__signalCallback") or function(...) return ... end
 
-            CustomSignals[IndexName] = {
-                SignalCallback = SignalCallback,
-                SignalId = ReactLibrary.Services.HttpService:GenerateGUID(false)
+            __customSignals[IndexName] = {
+                __signalCallback = __signalCallback,
+                __signalId = __react.__services.HttpService:GenerateGUID(false)
             }
         end
     end
 })
 
 do
-    ReactLibrary.Signals["DestroyingReliable"] = {
-        SignalCallback = function(CallData : {any})
-            local Object = rawget(CallData or {}, "Object")
-            local Callback = rawget(CallData or {}, "Callback")
+    __react.__signals["DestroyingReliable"] = {
+        __signalCallback = function(__calldata : {any})
+            local __obj = rawget(__calldata or {}, "__obj")
+            local __callback = rawget(__calldata or {}, "__callback")
 
-            if Object then
-                local RBXConnection = nil
+            if __obj then
+                local __RC = nil
 
-                RBXConnection = Object:GetPropertyChangedSignal("Parent"):Connect(function()
-                    if Object and Object.Parent == nil then
-                        if type(Callback) == "function" then
-                            Callback(Object)
-                            RBXConnection:Disconnect()
-                            RBXConnection = nil
+                __RC = __obj:GetPropertyChangedSignal("Parent"):Connect(function()
+                    if __obj and __obj.Parent == nil then
+                        if type(__callback) == "function" then
+                            __callback(__obj)
+                            __RC:Disconnect()
+                            __RC = nil
                         end
                     end
                 end)
 
-                ReactLibrary.ReactPool[RBXConnection] = RBXConnection
+                __react.__reactpool[__RC] = __RC
             end
         end
     }
 end
 
-function ReactLibrary.Create(ClassName : string, Properties : {any}, CreationCallback : any)
-    local Succeeded, Result = pcall(function()
-        local Object = Instance.new(ClassName)
-        Properties = Properties and Properties or {}
+function __react.Create(__className : string, __propers : {any}, __creationCallback : any)
+    local __succ, __result = pcall(function()
+        local __obj = Instance.new(__className)
+        __propers = __propers and __propers or {}
 
-        local ParentValue = Properties["Parent"]
-        Properties["Parent"] = nil
+        local __parValue = __propers["Parent"]
+        __propers["Parent"] = nil
        
-        for Property, PropertyValue in Properties do
-            if Property == "Attributes" then
-                for Attribute, AttributeValue in PropertyValue do
-                    Object:SetAttribute(Attribute, AttributeValue)
+        for __prop, __propVal in __propers do
+            if __prop == "Attributes" then
+                for __att, __attValue in __propVal do
+                    __obj:SetAttribute(__att, __attValue)
                 end
-            elseif Property == "Children" then
-                for _, Children in ipairs(PropertyValue) do
-                    Children.Parent = Object
+            elseif __prop == "Children" then
+                for _, __child in ipairs(__propVal) do
+                    __child.Parent = __obj
                 end
-            elseif Property == "Events" then
-                for SignalData, Callback in PropertyValue do
-                    local SignalName = rawget(SignalData, "SignalName")
-                    local SignalConnection = rawget(SignalData, "SignalConnectionType")
+            elseif __prop == "Events" then
+                for __signalData, __callback in __propVal do
+                    local __signalName = rawget(__signalData, "SignalName")
+                    local __signalConnectionType = rawget(__signalData, "SignalConnectionType")
 
-                    local RBXSignal = Object[SignalName]
+                    local __RS = __obj[__signalName]
 
-                    if typeof(RBXSignal) == "RBXScriptSignal" then
-                        if SignalConnection == "Once" then
-                            local RBXConnection = RBXSignal:Once(Callback)
-                            ReactLibrary.ReactPool[RBXConnection] = RBXConnection
+                    if typeof(__RS) == "RBXScriptSignal" then
+                        if __signalConnectionType == "Once" then
+                            local __RC = __RS:Once(__callback)
+                            __react.__reactpool[__RC] = __RC
                         else
-                            local RBXConnection = RBXSignal:Connect(Callback)
-                            ReactLibrary.ReactPool[RBXConnection] = RBXConnection
+                            local __RC = __RS:Connect(__callback)
+                            __react.__reactpool[__RC] = __RC
                         end
                     end
                 end
             else
-                Object[Property] = PropertyValue
+                __obj[__prop] = __parValue
             end
         end
 
-        Object.Parent = ParentValue
+        __obj.Parent = __parValue
     end)
 
-    if Succeeded then
-        if CreationCallback then
-            CreationCallback(Result, Succeeded)
+    if __succ then
+        if __creationCallback then
+            __creationCallback(__result, __succ)
         end
     else
-        if not Succeeded then
+        if not __succ then
             warn(
                 string.format(
-                    "[REACT LIB :: Library]: Caught an exception in safe call | %s",
-                    tostring(Result)
+                    "[MAX REACT :: Library]: Caught an exception in safe call | %s",
+                    tostring(__result)
                 )
             )
         end 
     end
 
-    return Result
+    return __result, __succ
 end
 
-function ReactLibrary.ApplyProperties(Object : Object, Properties : {any})
-    local Succeeded, Result = pcall(function()
-        Properties = Properties and Properties or {}
+function __react.ApplyProperties(__obj : Object, __propers : {any})
+    local __succ, __result = pcall(function()
+        __propers = __propers and __propers or {}
 
-        local ParentValue = Properties["Parent"]
-        Properties["Parent"] = nil
+        local __parValue = __propers["Parent"]
 
-        for Property, PropertyValue in Properties do
-            if Property == "Attributes" then
-                for Attribute, AttributeValue in PropertyValue do
-                    Object:SetAttribute(Attribute, AttributeValue)
+        if __parValue == nil and rawget(__propers, "Parent") == nil then
+            __parValue = __obj.Parent
+        end
+       
+        for __prop, __propVal in __propers do
+            if __prop == "Attributes" then
+                for __att, __attValue in __propVal do
+                    __obj:SetAttribute(__att, __attValue)
                 end
-            elseif Property == "Children" then
-                for _, Child in ipairs(PropertyValue) do
-                    Child.Parent = Object
+            elseif __prop == "Children" then
+                for _, __child in ipairs(__propVal) do
+                    __child.Parent = __obj
                 end
-            elseif Property == "Events" then
-                for SignalData, Callback in PropertyValue do
-                    local SignalName = rawget(SignalData, "SignalName")
-                    local SignalConnection = rawget(SignalData, "SignalConnectionType")
+            elseif __prop == "Events" then
+                for __signalData, Callback in __propVal do
+                    local __signalName = rawget(__signalData, "SignalName")
+                    local __signalConnectionType = rawget(__signalData, "SignalConnectionType")
 
-                    local RBXSignal = Object[SignalName]
+                    local __RS = __obj[__signalName]
 
-                   if typeof(RBXSignal) == "RBXScriptSignal" then
-                        if SignalConnection == "Once" then
-                            local RBXConnection = RBXSignal:Once(Callback)
-                            ReactLibrary.ReactPool[RBXConnection] = RBXConnection
+                    if typeof(__RS) == "RBXScriptSignal" then
+                        if __signalConnectionType == "Once" then
+                            local __RC = __RS:Once(Callback)
+                            __react.__reactpool[__RC] = __RC
                         else
-                            local RBXConnection = RBXSignal:Connect(Callback)
-                            ReactLibrary.ReactPool[RBXConnection] = RBXConnection
+                            local __RC = __RS:Connect(Callback)
+                            __react.__reactpool[__RC] = __RC
                         end
                     end
                 end
             else
-                Object[Property] = PropertyValue
+                __obj[__prop] = __parValue
             end
         end
 
-        Object.Parent = ParentValue
+        if __parValue then
+            __obj.Parent = __parValue
+        end
     end)
 
-    if not Succeeded then
-        warn(
-            string.format(
-                "[REACT LIB :: Library]: Caught an exception in safe call | %s",
-                tostring(Result)
+    if __succ then
+        if __creationCallback then
+            __creationCallback(__result, __succ)
+        end
+    else
+        if not __succ then
+            warn(
+                string.format(
+                    "[MAX REACT :: Library]: Caught an exception in safe call | %s",
+                    tostring(__result)
+                )
             )
-        )
+        end 
     end
 
-    return Result, Succeeded
+    return __result, __succ
 end
 
-function ReactLibrary.ConnectReact(SignalData : string, Callback : any)
-    local Succeeded, Result = pcall(function()
-        local SignalName = rawget(SignalData, "SignalName")
-        local SignalConnection = rawget(SignalData, "SignalConnectionType")
+function __react.ConnectReact(__obj : Object, __signalData : {any}, __callback : any)
+    local __succ, __result = pcall(function()
+        local __signalName = rawget(__signalData, "SignalName")
+        local __signalConnectionType = rawget(__signalData, "SignalConnectionType")
 
-        local RBXSignal = Object[SignalName]
+        local __RS = __obj[__signalName]
 
-        if typeof(RBXSignal) == "RBXScriptSignal" then
-            if SignalConnection == "Once" then
-                RBXSignal:Once(Callback)
+        if typeof(__RS) == "RBXScriptSignal" then
+            if __signalConnectionType == "Once" then
+                __RS:Once(__callback)
             else
-                RBXSignal:Connect(Callback)
+                __RS:Connect(__callback)
             end
         end
     end)
 
-    if not Succeeded then
+    if not __succ then
         warn(
             string.format(
                 "[REACT LIB :: Library]: Caught an exception in safe call | %s",
-                tostring(Result)
+                tostring(__result)
             )
         )
     end
 
-    return Result, Succeeded
+    return __result, __succ
 end
 
-function ReactLibrary.ConnectCustomReact(SignalData : {any})
-    local Succeeded, Result = pcall(function()
-        local SignalName = rawget(SignalData, "SignalName")
-        ReactLibrary.Signals(SignalName)
+function __react.ConnectCustomReact(__signalData : {any})
+    local __succ, __result = pcall(function()
+        local __signalName = rawget(__signalData, "SignalName")
+        __react.__signals(__signalName)
     end)
 
-    if not Succeeded then
+    if not __succ then
         warn(
             string.format(
                 "[REACT LIB :: Library]: Caught an exception in safe call | %s",
-                tostring(Result)
+                tostring(__result)
             )
         )
     end
 
-    return Result, Succeeded
+    return __result, __succ
 end
 
-function ReactLibrary.AddToJanitor(Entry : any)
-    ReactLibrary.ReactPool[Entry] = Entry
+function __react.AddToJanitor(__entry : any)
+    __react.__reactpool[Entry__entry] = __entry
 end
 
-function ReactLibrary.CacheJanitor()
-    ReactLibrary.ReactPool()
+function __react.CacheJanitor()
+    __react.__reactpool()
 end
 
-function ReactLibrary.Exit()
-    ReactLibrary.ReactPool()
-    table.clear(ReactLibrary)
+function __react.Exit()
+    __react.__reactpool()
 
-    ReactLibrary = nil
+    for _, __entry in ipairs(__react) do
+        if type(__entry) == "table" then
+            table.clear(__entry)
+        end
+    end
+
+    table.clear(__react)
+    __react = nil
 end
 
-return ReactLibrary
+return __react
