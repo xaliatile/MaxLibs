@@ -56,11 +56,10 @@ local __main = {
             local __succ, __result = pcall(__callback)
 
             if not __succ then
-                if __cTag == "__main__" then
+                if __cTag == "main" then
                     warn(
                         string.format(
-                            "[MAXUI | FATAL INTERNAL ERROR (%s)]: MaxUI experienced a fatal error and cannot continue | Error: %s", 
-                            "__main__",
+                            "[MAXUI | FATAL INTERNAL ERROR (main)]: MaxUI experienced a fatal error and cannot continue | Error: %s", 
                             __result
                         )
                     )
@@ -706,8 +705,10 @@ return function(...)
     local __mainSuccess = __main.__runners.__runPr(function()
         __main.__external.__services("HttpService")
         __main.__external.__services("CoreGui")
-
-        __main.__external.__reactLibrary = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/ReactLibrary.lua")
+        
+        local __react = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/ReactLibrary.lua")
+        __main.__external.__reactLibrary = __react
+        
         InitUI()
     end, "__main__")
 
