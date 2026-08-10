@@ -25,7 +25,7 @@ local __main = {
                 end
             end,
 
-            __index = function(self, __index)
+            __index = function(self, __serviceName)
                 local services = rawget(self, "__services")
                 return services[__serviceName]
             end
@@ -705,6 +705,7 @@ end
 return function(...)
     local __mainSuccess = __main.__runners.__runPr(function()
         __main.__external.__services("HttpService")
+        __main.__external.__services("CoreGui")
 
         __main.__external.__reactLibrary = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/ReactLibrary.lua")
         InitUI()
