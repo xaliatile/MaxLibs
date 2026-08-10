@@ -3,7 +3,7 @@
 local __main = {
 	__db = true,
 
-	__scriptVer = "1.0.4",
+	__scriptVer = "1.0.5",
 	__scriptBuild = "PA",
 
 	__exeStart = os.clock(),
@@ -616,11 +616,13 @@ local function __initUI()
 				Enum.EasingDirection[AnimatableObject:GetAttribute("__animDir") or "Out"]
 			)
 
+            local KeepsOffset = AnimatableObject:GetAttribute("__animKeepPosition") and true or false
+
 			if __main.__external.__reactLibrary.HasIndex(AnimatableObject, "MouseEnter") and AnimatableObject:GetAttribute("__animHoverSize") then
 				__main.__external.__reactLibrary.AddToJanitor(AnimatableObject.MouseEnter:Connect(function()
 					__main.__external.__services.TweenService:Create(AnimatableObject, RebuiltInfo, {
 						Size = AnimatableObject:GetAttribute("__animHoverSize"),
-						Position = (AnimatableObject:GetAttribute("__animHoverPosition") or AnimatableObject.Position)
+						Position = (AnimatableObject:GetAttribute("__animKeepPosition") and AnimatableObject.Position or (AnimatableObject:GetAttribute("__animHoverPosition") or AnimatableObject.Position))
 					}):Play()
 				end))
 			end
@@ -629,7 +631,7 @@ local function __initUI()
 				__main.__external.__reactLibrary.AddToJanitor(AnimatableObject.MouseLeave:Connect(function()
 					__main.__external.__services.TweenService:Create(AnimatableObject, RebuiltInfo, {
 						Size = AnimatableObject:GetAttribute("__animDefaultSize"),
-						Position = (AnimatableObject:GetAttribute("__animKeepPosition") and AnimatableObject.Position or AnimatableObject:GetAttribute("__animDefaultPosition"))
+						Position = (AnimatableObject:GetAttribute("__animKeepPosition") and AnimatableObject.Position or (AnimatableObject:GetAttribute("__animDefaultPosition") or AnimatableObject.Position))
 					}):Play()
 				end))
 			end
@@ -638,7 +640,7 @@ local function __initUI()
 				__main.__external.__reactLibrary.AddToJanitor(AnimatableObject.MouseButton1Down:Connect(function()
 					__main.__external.__services.TweenService:Create(AnimatableObject, RebuiltInfo, {
 						Size = AnimatableObject:GetAttribute("__animClickSize"),
-						Position = (AnimatableObject:GetAttribute("__animKeepPosition") and AnimatableObject.Position or AnimatableObject:GetAttribute("__animClickPosition"))
+						Position = (AnimatableObject:GetAttribute("__animKeepPosition") and AnimatableObject.Position or (AnimatableObject:GetAttribute("__animClickPosition") or AnimatableObject.Position))
 					}):Play()
 				end))
 			end
@@ -647,7 +649,7 @@ local function __initUI()
 				__main.__external.__reactLibrary.AddToJanitor(AnimatableObject.MouseButton1Up:Connect(function()
 					__main.__external.__services.TweenService:Create(AnimatableObject, RebuiltInfo, {
 						Size = AnimatableObject:GetAttribute("__animDefaultSize"),
-						Position = (AnimatableObject:GetAttribute("__animKeepPosition") and AnimatableObject.Position or AnimatableObject:GetAttribute("__animDefaultPosition"))
+						Position = (AnimatableObject:GetAttribute("__animKeepPosition") and AnimatableObject.Position or (AnimatableObject:GetAttribute("__animDefaultPosition") or AnimatableObject.Position))
 					}):Play()
 				end))
 			end
