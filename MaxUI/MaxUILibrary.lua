@@ -3,7 +3,7 @@
 local __main = {
 	__db = true,
 
-	__scriptVer = "1.0.5",
+	__scriptVer = "1.0.6",
 	__scriptBuild = "PA",
 
 	__exeStart = os.clock(),
@@ -294,7 +294,7 @@ local function __initUI()
 		AnchorPoint = Vector2.new(0, 0.5),
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
-		Position = UDim2.new(0, 0, 0, 0.5),
+		Position = UDim2.new(0, 0, 0.5, 0),
 		Size = UDim2.new(0, 22, 0, 22),
 		Parent = TopbarTitleContainer
 	})
