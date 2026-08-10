@@ -750,7 +750,7 @@ return function(...)
         local __react, __reactGitSucc = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/ReactLibrary.lua")
         local __verData, __verGitSucc = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/MaxUI/LatestVer.lua")
 
-        if not __reactGitSuc or not __react or not __verData or not __verGitSucc then
+        if not __reactGitSuc or not __verGitSucc then
             -- our protected call function will grab this error and print a warning statement.
 
             __main.__runners.__runLgFunc(
