@@ -629,7 +629,7 @@ local function __initUI()
 				__main.__external.__reactLibrary.AddToJanitor(AnimatableObject.MouseLeave:Connect(function()
 					__main.__external.__services.TweenService:Create(AnimatableObject, RebuiltInfo, {
 						Size = AnimatableObject:GetAttribute("__animDefaultSize"),
-						Position = (not AnimatableObject:GetAttribute("__animReturnToOrigin") and AnimatableObject.Position or AnimatableObject:GetAttribute("__animDefaultPosition"))
+						Position = (AnimatableObject:GetAttribute("__animKeepPosition") and AnimatableObject.Position or AnimatableObject:GetAttribute("__animDefaultPosition"))
 					}):Play()
 				end))
 			end
@@ -638,7 +638,7 @@ local function __initUI()
 				__main.__external.__reactLibrary.AddToJanitor(AnimatableObject.MouseButton1Down:Connect(function()
 					__main.__external.__services.TweenService:Create(AnimatableObject, RebuiltInfo, {
 						Size = AnimatableObject:GetAttribute("__animClickSize"),
-						Position = (not AnimatableObject:GetAttribute("__animReturnToOrigin") and AnimatableObject.Position or AnimatableObject:GetAttribute("__animClickPosition"))
+						Position = (AnimatableObject:GetAttribute("__animKeepPosition") and AnimatableObject.Position or AnimatableObject:GetAttribute("__animClickPosition"))
 					}):Play()
 				end))
 			end
@@ -647,7 +647,7 @@ local function __initUI()
 				__main.__external.__reactLibrary.AddToJanitor(AnimatableObject.MouseButton1Up:Connect(function()
 					__main.__external.__services.TweenService:Create(AnimatableObject, RebuiltInfo, {
 						Size = AnimatableObject:GetAttribute("__animDefaultSize"),
-						Position = (not AnimatableObject:GetAttribute("__animReturnToOrigin") and AnimatableObject.Position or AnimatableObject:GetAttribute("__animDefaultPosition"))
+						Position = (AnimatableObject:GetAttribute("__animKeepPosition") and AnimatableObject.Position or AnimatableObject:GetAttribute("__animDefaultPosition"))
 					}):Play()
 				end))
 			end
