@@ -210,12 +210,12 @@ do
 	}
 end
 
-function __react.HasProperty(__obj : Object, __prop : string)
-    local __hasProp = pcall(function()
-        return __obj[__prop]
+function __react.HasIndex(__obj : Object, __index : string)
+    local __hasIndex = pcall(function()
+        return __obj[__index]
     end)
 
-    return __hasProp
+    return __hasIndex
 end
 
 function __react.Create(__className : string, __propers : {any}, __creationCallback : any)
@@ -237,7 +237,7 @@ function __react.Create(__className : string, __propers : {any}, __creationCallb
 				end
 			elseif __prop == "Children" then
 				for _, __child in ipairs(__propVal) do
-                    if __react.HasProperty(__child, "Parent") then
+                    if __react.HasIndex(__child, "Parent") then
                     	__child.Parent = __obj
                     end
 				end
@@ -305,7 +305,7 @@ function __react.ApplyProperties(__obj : Object, __propers : {any})
 				end
 			elseif __prop == "Children" then
 				for _, __child in ipairs(__propVal) do
-					if __react.HasProperty(__child, "Parent") then
+					if __react.HasIndex(__child, "Parent") then
                     	__child.Parent = __obj
                     end
 				end
