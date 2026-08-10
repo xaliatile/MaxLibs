@@ -756,7 +756,6 @@ return function(...)
         local __verData, __verGitSucc = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/MaxUI/LatestVer.lua")
  
         __main.__runners.__runIf(function()
-            print("fucckckkckckc")
             __main.__runners.__runLgFunc(
                 error,
                 string.format(
@@ -766,6 +765,8 @@ return function(...)
                 )
             )
         end, (__reactGitSucc == false and __verGitSucc == false))
+
+        print('so steuipid')
 
         if __getVerOutdation(__verData) then
             __main.__runners.__runLgFunc(
