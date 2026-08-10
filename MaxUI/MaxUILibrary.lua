@@ -301,8 +301,8 @@ local function __initUI()
         BackgroundTransparency = 1,
         BorderSizePixel = 0,
         Position = UDim2.new(0.562069297, 0, 0.154254988, 0),
-        Size = UDim2.new(0, 20, 0, 20),
-        Name = "Exit",
+        Size = UDim2.new(0, 18, 0, 18) -- smaller offset to fit into the other button sizes.,
+        Name = "Maximize",
         LayoutOrder = 1,
         Parent = UIButtonPadding,
         Children = {
@@ -333,7 +333,7 @@ local function __initUI()
         BackgroundTransparency = 1,
         Position = UDim2.new(0, 20, 0, 23),
         Size = UDim2.new(0, 201, 0, 15),
-        ClipsDescendants = true,
+        ClipsDescendants = false,
         Parent = Topbar
     })
 
