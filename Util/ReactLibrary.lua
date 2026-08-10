@@ -215,7 +215,7 @@ function __react.Create(__className : string, __propers : {any}, __creationCallb
 		local __obj = Instance.new(__className)
 		__propers = (__propers and __propers or {})
 
-		local __parValue = __propers["Parent"]
+		local __parentValue = __propers["Parent"]
 		__propers["Parent"] = nil
 
 		for __prop, __propVal in pairs(__propers) do
@@ -249,7 +249,7 @@ function __react.Create(__className : string, __propers : {any}, __creationCallb
 			end
 		end
 
-		__obj.Parent = __parValue
+		__obj.Parent = __parentValue
 
 		return __obj
 	end)
