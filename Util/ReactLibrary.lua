@@ -218,6 +218,10 @@ function __react.Create(__className : string, __propers : {any}, __creationCallb
 		local __parentValue = __propers["Parent"]
 		__propers["Parent"] = nil
 
+        if __parentValue == nil and rawget(__propers, "Parent") == nil then
+			__parentValue = __obj.Parent
+		end
+
 		for __prop, __propVal in __propers do
 			if __prop == "Attributes" then
 				for __att, __attValue in __propVal do
@@ -280,8 +284,8 @@ function __react.ApplyProperties(__obj : Object, __propers : {any})
 		local __parentValue = __propers["Parent"]
 		__propers["Parent"] = nil
 
-		if __parValue == nil and rawget(__propers, "Parent") == nil then
-			__parValue = __obj.Parent
+		if __parentValue == nil and rawget(__propers, "Parent") == nil then
+			__parentValue = __obj.Parent
 		end
 
 		for __prop, __propVal in __propers do
