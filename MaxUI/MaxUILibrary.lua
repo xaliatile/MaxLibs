@@ -3,8 +3,8 @@
 local __main = {
     __db = true,
 
-    __scriptVer = "1.0.1",
-    __latestLibVer = nil,
+    __scriptVer = "1.0.3",
+    __scriptBuild = "PA",
 
     __exeStart = os.clock(),
     __uielements = {
@@ -96,6 +96,7 @@ local __main = {
 local function __getVerOutdation(__verData : {any})
     local __testEnvVer = rawget(__verData, "TestEnvVersion")
     local __streamVer = rawget(__verData, "Version")
+    local __libBuildVer = rawget(__verData, "LibraryBuild")
 
     local __mainVerString = (__main.__db and __testEnvVer or __streamVer)
     __main.__latestLibVer = __mainVerString
@@ -110,17 +111,20 @@ local function __getVerOutdation(__verData : {any})
     __mainLibVersion[2] = tonumber(__mainLibVersion[2])
     __mainLibVersion[3] = tonumber(__mainLibVersion[3])
 
+    local __scriptBuildComp = __main.__scriptBuild == __libBuildVer
     local __majorComp = __scriptVersion[1] >= __mainLibVersion[1]
     local __minorComp = __scriptVersion[2] >= __mainLibVersion[2]
     local __patchComp = __scriptVersion[3] >= __mainLibVersion[3]
 
     local __verdict = false
+    local __outdationType = nil
 
-    if not __majorComp then __verdict = true end
-    if not __minorComp then __verdict = true end
-    if not __patchComp then __verdict = true end
+    if not __majorComp then __verdict = true __outdationType = "__major" end
+    if not __minorComp then __verdict = true __outdationType == "__minor" end
+    if not __patchComp then __verdict = true __patchComp == "__patch" end
+    if not __scriptBuildComp then __verdict = true __patchComp == "__build" end
 
-    return __verdict
+    return __verdict, __outdationType
 end
 
 local function __initUI()
@@ -439,6 +443,10 @@ local function __initUI()
                 Padding = UDim.new(0.00999999978, 0),
                 SortOrder = Enum.SortOrder.LayoutOrder
             })
+
+            __main.__external.__reactLibrary.Create("UIPadding", {
+                PaddingRight = UDim.new(0, 8),
+            })
         }
     })
 
@@ -474,8 +482,8 @@ local function __initUI()
 
             __main.__external.__reactLibrary.Create("UIStroke", {
                 Color = Color3.fromRGB(155.00000596046448, 155.00000596046448, 155.00000596046448),
-                ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-                BorderStrokePosition = Enum.BorderStrokePosition.Center,
+                ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+                BorderStrokePosition = Enum.BorderStrokePosition.Inner,
                 BorderOffset = UDim.new(0, -3)
             }),
 
@@ -536,8 +544,8 @@ local function __initUI()
 
             __main.__external.__reactLibrary.Create("UIStroke", {
                 Color = Color3.fromRGB(0, 255, 0),
-                ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-                BorderStrokePosition = Enum.BorderStrokePosition.Center,
+                ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+                BorderStrokePosition = Enum.BorderStrokePosition.Inner,
                 BorderOffset = UDim.new(0, -3)
             }),
 
@@ -756,7 +764,7 @@ return function(...)
         __main.__external.__services("CoreGui")
         
         local __react, __reactGitSucc = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/Util/ReactLibrary.lua")
-        local __verData, __verGitSucc = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/MaxUI/LatestVer.lua")
+        local __verData, __verGitSucc = __main.__runners.__getRepository("hhttps://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/MaxUI/Version.lua")
  
         __main.__runners.__runIf(function()
             __main.__runners.__runLgFunc(
@@ -769,19 +777,55 @@ return function(...)
             )
         end, (__reactGitSucc == false and __verGitSucc == false))
 
-        if __getVerOutdation(__verData) then
+        local __outdated, __outdationType = __getVerOutdation(__verData)
+        __main.__runners.__runIf(function()
+            local __testEnvVer = rawget(__verData, "TestEnvVersion")
+            local __streamVer = rawget(__verData, "Version")
+            local __libBuildVer = rawget(__verData, "LibraryBuild")
+
+            local __scriptVersion = string.format(
+                "%s | %s",
+                __main.__scriptBuild or "Build not found",
+                __main.__scriptVer or "Ver not found"
+            )
+
+            local __libVersion = string.format(
+                "%s | %s",
+                __libBuildVer or "Build not found",
+                (__main.__db and __testEnvVer or __streamVer) or "Ver not found"
+            )
+
+            local __response = (__outdationType == "__build" and string.format(
+                "MaxLib is extremely outdated and needs to be updated / Latest Version %s | Current Version: %s",
+                __libVersion,
+                __scriptVersion
+            ) or string.format(
+                "MaxLib is outdated and needs to be updated / Latest Version %s | Current Version: %s",
+                __libVersion,
+                __scriptVersion
+            ))
+
             __main.__runners.__runLgFunc(
                 warn,
-                string.format(
-                    "MaxLib is outdated, Current Version: %s | Latest Version: %s",
-                    __main.__scriptVer,
-                    tostring(__main.__latestLibVer or "err ver not found")
-                )
+                __response
             )
-        end
+
+            if __outdationType == "__build" then
+                __main.__runners.__runLgFunc(
+                    error,
+                    __response
+                )
+
+                return
+            else
+                __main.__runners.__runLgFunc(
+                    warn,
+                    __response
+                )
+            end
+        end, __outdated == true)
 
         __main.__external.__reactLibrary = __react
-
         __initUI()
     end, "main")
 
