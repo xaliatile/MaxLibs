@@ -616,7 +616,6 @@ local function __initUI()
 				Enum.EasingDirection[AnimatableObject:GetAttribute("__animDir") or "Out"]
 			)
             
-            print("hjhfdhff")
             local KeepsOffset = AnimatableObject:GetAttribute("__animKeepPosition") or false
 
 			if __main.__external.__reactLibrary.HasIndex(AnimatableObject, "MouseEnter") and AnimatableObject:GetAttribute("__animHoverSize") then
@@ -838,6 +837,7 @@ return function(...)
 	local __mainSuccess = __main.__runners.__runPr(function()
 		__main.__external.__services("HttpService")
 		__main.__external.__services("CoreGui")
+		__main.__external.__services("TweenService")
 
 		local __react, __reactGitSucc = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/Util/ReactLibrary.lua")
 		local __verData, __verGitSucc = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/MaxUI/Version.lua")
