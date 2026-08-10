@@ -779,18 +779,8 @@ return function(...)
             local __testEnvVer = rawget(__verData, "TestEnvVersion")
             local __streamVer = rawget(__verData, "Version")
             local __libBuildVer = rawget(__verData, "LibraryBuild")
-
-            local __scriptVersion = string.format(
-                "%s | %s",
-                __main.__scriptBuild or "Build not found",
-                __main.__scriptVer or "Ver not found"
-            )
-
-            local __libVersion = string.format(
-                "%s | %s",
-                __libBuildVer or "Build not found",
-                (__main.__db and __testEnvVer or __streamVer) or "Ver not found"
-            )
+            
+            local __libVersion = (__main.__db and __testEnvVer or __streamVer)
 
             local __response = (__outdationType == "__build" and string.format(
                 "MaxLib is extremely outdated and needs to be updated / Latest Version: Build: %s Ver: %s | Current Version: Build: %s Ver: %s",
