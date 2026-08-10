@@ -333,18 +333,8 @@ local function __initUI()
 		BorderSizePixel = 0,
 		ClipsDescendants = true,
 		Position = UDim2.new(0.5, 0, 0.5, 0),
-		Size = UDim2.new(0.967879236, 0, 0.950000048, 0),
+		Size = UDim2.new(0.975, 0, 0.950000048, 0),
 		Parent = MainFrame
-	})
-
-	local TabsContainer = __main.__external.__reactLibrary.Create("Frame", {
-		Name = "TabsContainer",
-		BackgroundTransparency = 1,
-		BorderSizePixel = 0,
-		ClipsDescendants = true,
-		Position = UDim2.new(0.284829736, 0, 0.022580646, 0),
-		Size = UDim2.new(0, 467, 0.954838693, 0),
-		Parent = InnerUI
 	})
 
 	local TabsContainer = __main.__external.__reactLibrary.Create("Frame", {
