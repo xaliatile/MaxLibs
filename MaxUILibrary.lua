@@ -141,13 +141,13 @@ local function InitUI()
     local WorkSansRegular = Font.fromId(12187373327, Enum.FontWeight.Regular, Enum.FontStyle.Normal)
     local WorkSansMedium = Font.fromId(12187373327, Enum.FontWeight.Medium, Enum.FontStyle.Normal)
 
-    local MainGui = __reactLib.Create("StarterGui", {
+    local MainGui = __main.__external.__reactLibrary.Create("StarterGui", {
         Name = __main.__external.__services.HttpService:GenerateGUID(false),
         Parent = (__main.__db and __main.__external.__services.CoreGui or gethui()),
         IgnoreGuiInset = true
     })
 
-    local MainFrame = __reactLib.Create("Frame", {
+    local MainFrame = __main.__external.__reactLibrary.Create("Frame", {
         Name = "MainFrame",
         AnchorPoint = Vector2.new(0.5, 0.5),
         BackgroundColor3 = Color3.fromRGB(15.000000055879354, 15.000000055879354, 15.000000055879354),
@@ -156,21 +156,21 @@ local function InitUI()
         Size = UDim2.new(0, 666, 0, 357),
         Parent = MainGui,
         Children = {
-            __reactLib.Create("CornerRadius", {
+            __main.__external.__reactLibrary.Create("CornerRadius", {
                 TopRightRadius = UDim.new(0, 0),
                 TopLeftRadius = UDim.new(0, 0),
                 BottomLeftRadius = UDim.new(0, 8),
                 BottomRightRadius = UDim.new(0, 8)
             }),
 
-            __reactLib.Create("UIShadow", {
+            __main.__external.__reactLibrary.Create("UIShadow", {
                 BlurRadius = UDim.new(0, 20),
                 Color = Color3.fromRGB(22.000000588595867, 22.000000588595867, 22.000000588595867)
             })
         }
     })
 
-    local Topbar = __reactLib.Create("Frame", {
+    local Topbar = __main.__external.__reactLibrary.Create("Frame", {
         Name = "Topbar",
         AnchorPoint = Vector2.new(0.5, 0),
         BackgroundColor3 = Color3.fromRGB(23.000000528991222, 23.000000528991222, 23.000000528991222),
@@ -180,21 +180,21 @@ local function InitUI()
         ClipsDescendants = true,
         Parent = MainFrame,
         Children = {
-            __reactLib.Create("CornerRadius", {
+            __main.__external.__reactLibrary.Create("CornerRadius", {
                 TopRightRadius = UDim.new(0, 8),
                 TopLeftRadius = UDim.new(0, 8),
                 BottomLeftRadius = UDim.new(0, 0),
                 BottomRightRadius = UDim.new(0, 0)
             }),
 
-            __reactLib.Create("UIShadow", {
+            __main.__external.__reactLibrary.Create("UIShadow", {
                 BlurRadius = UDim.new(0, 20),
                 Color = Color3.fromRGB(22.000000588595867, 22.000000588595867, 22.000000588595867)
             })
         }
     })
 
-    local UIMainButtons = __reactLib.Create("Frame", {
+    local UIMainButtons = __main.__external.__reactLibrary.Create("Frame", {
         Name = "UIMainButtons",
         AnchorPoint = Vector2.new(1, 0),
         BorderSizePixel = 0,
@@ -205,7 +205,7 @@ local function InitUI()
         Parent = Topbar
     })
 
-    local ExitButton = __reactLib.Create("ImageButton", {
+    local ExitButton = __main.__external.__reactLibrary.Create("ImageButton", {
         Image = "rbxassetid://10747384394",
         ResampleMode = Enum.ResamplerMode.Pixelated,
         ScaleType = Enum.ScaleType.Fit,
@@ -216,11 +216,11 @@ local function InitUI()
         Name = "Exit",
         LayoutOrder = 0,
         Children = {
-            __reactLib.Create("UIAspectRatioConstraint")
+            __main.__external.__reactLibrary.Create("UIAspectRatioConstraint")
         }
     })
 
-    local MaximizeButton = __reactLib.Create("ImageButton", {
+    local MaximizeButton = __main.__external.__reactLibrary.Create("ImageButton", {
         Image = "rbxassetid://10734965702",
         ResampleMode = Enum.ResamplerMode.Pixelated,
         ScaleType = Enum.ScaleType.Fit,
@@ -231,11 +231,11 @@ local function InitUI()
         Name = "Exit",
         LayoutOrder = 2,
         Children = {
-            __reactLib.Create("UIAspectRatioConstraint")
+            __main.__external.__reactLibrary.Create("UIAspectRatioConstraint")
         }
     })
 
-    local MinimizeButton = __reactLib.Create("ImageButton", {
+    local MinimizeButton = __main.__external.__reactLibrary.Create("ImageButton", {
         Image = "rbxassetid://10734896206",
         ResampleMode = Enum.ResamplerMode.Pixelated,
         ScaleType = Enum.ScaleType.Fit,
@@ -246,11 +246,11 @@ local function InitUI()
         Name = "Minimize",
         LayoutOrder = 2,
         Children = {
-            __reactLib.Create("UIAspectRatioConstraint")
+            __main.__external.__reactLibrary.Create("UIAspectRatioConstraint")
         }
     })
 
-    local UIButtonPadding = __reactLib.Create("Frame", {
+    local UIButtonPadding = __main.__external.__reactLibrary.Create("Frame", {
         Name = "UIMainButtons",
         AnchorPoint = Vector2.new(0.5, 0.5),
         BorderSizePixel = 0,
@@ -260,7 +260,7 @@ local function InitUI()
         ClipsDescendants = true,
         Parent = UIMainButtons,
         Children = {
-            __reactLib.Create("UIListLayout", {
+            __main.__external.__reactLibrary.Create("UIListLayout", {
                 Padding = UDim.new(0.150000006, 0),
                 FillDirection = Enum.FillDirection.Horizontal,
                 HorizontalAlignment = Enum.HorizontalAlignment.Center,
@@ -270,7 +270,7 @@ local function InitUI()
         }
     })     
 
-    local TopbarTitleContainer = __reactLib.Create("Frame", {
+    local TopbarTitleContainer = __main.__external.__reactLibrary.Create("Frame", {
         Name = "TitleContainer",
         AnchorPoint = Vector2.new(0, 0.5),
         BorderSizePixel = 0,
@@ -281,7 +281,7 @@ local function InitUI()
         Parent = Topbar
     })
 
-    local TopbarTitleText = __reactLib.Create("TextLabel", {
+    local TopbarTitleText = __main.__external.__reactLibrary.Create("TextLabel", {
         Name = "Title",
         AnchorPoint = Vector2.new(0.5, 0.5),
         BorderSizePixel = 0,
@@ -295,7 +295,7 @@ local function InitUI()
         Parent = TopbarTitleContainer
     })
 
-    local AboutButton = __reactLib.Create("ImageButton", {
+    local AboutButton = __main.__external.__reactLibrary.Create("ImageButton", {
         Image = "rbxassetid://10709782497",
         AnchorPoint = Vector2.new(0, 0.5),
         Position = UDim2.new(0, 0, 0.5, 0),
@@ -307,11 +307,11 @@ local function InitUI()
         Name = "About",
         Parent = TopbarTitleContainer,
         Children = {
-            __reactLib.Create("UIAspectRatioConstraint")
+            __main.__external.__reactLibrary.Create("UIAspectRatioConstraint")
         }
     })
 
-    local InnerUI = __reactLib.Create("Frame", {
+    local InnerUI = __main.__external.__reactLibrary.Create("Frame", {
         Name = "InnerUI",
         AnchorPoint = Vector2.new(0.5, 0.5),
         BackgroundTransparency = 1,
@@ -322,7 +322,7 @@ local function InitUI()
         Parent = MainFrame
     })
 
-    local TabsContainer = __reactLib.Create("Frame", {
+    local TabsContainer = __main.__external.__reactLibrary.Create("Frame", {
         Name = "TabsContainer",
         BackgroundTransparency = 1,
         BorderSizePixel = 0,
@@ -332,7 +332,7 @@ local function InitUI()
         Parent = InnerUI
     })
 
-    local TabsContainer = __reactLib.Create("Frame", {
+    local TabsContainer = __main.__external.__reactLibrary.Create("Frame", {
         Name = "TabsContainer",
         BackgroundTransparency = 1,
         BorderSizePixel = 0,
@@ -342,7 +342,7 @@ local function InitUI()
         Parent = InnerUI
     })
 
-    local TabsSidebarList = __reactLib.Create("Frame", {
+    local TabsSidebarList = __main.__external.__reactLibrary.Create("Frame", {
         Name = "TabsSidebarList",
         AnchorPoint = Vector2.new(0, 0.5),
         BackgroundColor3 = Color3.fromRGB(23.000000528991222, 23.000000528991222, 23.000000528991222),
@@ -351,13 +351,13 @@ local function InitUI()
         Size = UDim2.new(0, 167, 1, 0),
         Parent = InnerUI,
         Children = {
-            __reactLib.Create("CornerRadius", {
+            __main.__external.__reactLibrary.Create("CornerRadius", {
                 CornerRadius = UDim.new(0, 5)
             }),
         }
     })
 
-    local InnerSidebarPadding = __reactLib.Create("Frame", {
+    local InnerSidebarPadding = __main.__external.__reactLibrary.Create("Frame", {
         Name = "InnerSidebarPadding",
         AnchorPoint = Vector2.new(0.5, 0.5),
         BackgroundTransparency = 1,
@@ -366,7 +366,7 @@ local function InitUI()
         Parent = TabsSidebarList
     })
 
-    local TabsList = __reactLib.Create("ScrollingFrame", {
+    local TabsList = __main.__external.__reactLibrary.Create("ScrollingFrame", {
         Name = "TabsList",
         ScrollBarImageTransparency = 1, 
         BackgroundTransparency = 1,
@@ -377,14 +377,14 @@ local function InitUI()
         ScrollBarThickness = 7,
         Parent = InnerSidebarPadding,
         Children = {
-            __reactLib.Create("UIListLayout", {
+            __main.__external.__reactLibrary.Create("UIListLayout", {
                 Padding = UDim.new(0.00999999978, 0),
                 SortOrder = Enum.SortOrder.LayoutOrder
             })
         }
     })
 
-    __main.__uielements.__uiTemplates["TabCategoryTemplate"] = __reactLib.Create("TextLabel", {
+    __main.__uielements.__uiTemplates["TabCategoryTemplate"] = __main.__external.__reactLibrary.Create("TextLabel", {
         Name = "TabCategorySeparator",
         AnchorPoint = Vector2.new(0.5, 0.5),
         BorderSizePixel = 0,
@@ -402,7 +402,7 @@ local function InitUI()
         Parent = TopbarTitleContainer
     })
 
-    __main.__uielements.__uiTemplates["SidebarTabTemplate"] = __reactLib.Create("Frame", {
+    __main.__uielements.__uiTemplates["SidebarTabTemplate"] = __main.__external.__reactLibrary.Create("Frame", {
         Name = "SidebarTabTemplate",
         BackgroundColor3 = Color3.fromRGB(15.000000055879354, 15.000000055879354, 15.000000055879354),
         BorderSizePixel = 0,
@@ -410,11 +410,11 @@ local function InitUI()
         Visible = false,
         Children = {
             -- Display Spice
-            __reactLib.Create("UICorner", {
+            __main.__external.__reactLibrary.Create("UICorner", {
                 CornerRadius = UDim.new(0, 5)
             }),
 
-            __reactLib.Create("UIStroke", {
+            __main.__external.__reactLibrary.Create("UIStroke", {
                 Color = Color3.fromRGB(155.00000596046448, 155.00000596046448, 155.00000596046448),
                 ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
                 BorderStrokePosition = Enum.BorderStrokePosition.Inner,
@@ -422,7 +422,7 @@ local function InitUI()
             }),
 
             -- Inner Padding
-            __reactLib.Create("Frame", {
+            __main.__external.__reactLibrary.Create("Frame", {
                 Name = "InnerPadding",
                 AnchorPoint = Vector2.new(0.5, 0.5),
                 BackgroundTransparency = 1,
@@ -431,7 +431,7 @@ local function InitUI()
                 Size = UDim2.new(0.899999976, 0, 0.899999976, 0),
                 Children = {
                     -- Tab Name
-                    __reactLib.Create("TextLabel", {
+                    __main.__external.__reactLibrary.Create("TextLabel", {
                         Name = "TabName",
                         AnchorPoint = Vector2.new(0.5, 0.5),
                         RichText = true,
@@ -444,7 +444,7 @@ local function InitUI()
                     }),
 
                     -- Tab Icon
-                    __reactLib.Create("ImageButton", {
+                    __main.__external.__reactLibrary.Create("ImageButton", {
                         Image = "rbxassetid://10734943448",
                         AnchorPoint = Vector2.new(0, 0.5),
                         Position = UDim2.new(0.0500000007, 0, 0.5, 0),
@@ -456,7 +456,7 @@ local function InitUI()
                         Name = "TabIcon",
                         Parent = TopbarTitleContainer,
                         Children = {
-                            __reactLib.Create("UIAspectRatioConstraint")
+                            __main.__external.__reactLibrary.Create("UIAspectRatioConstraint")
                         }
                     })
                 }         
@@ -464,7 +464,7 @@ local function InitUI()
         }
     })
 
-    __main.__uielements.__uiTemplates["GeneralResultTemplate"] = __reactLib.Create("Frame", {
+    __main.__uielements.__uiTemplates["GeneralResultTemplate"] = __main.__external.__reactLibrary.Create("Frame", {
         Name = "GeneralResultTemplate",
         BackgroundColor3 = Color3.fromRGB(23, 23, 23),
         BorderSizePixel = 0,
@@ -472,11 +472,11 @@ local function InitUI()
         Visible = false,
         Children = {
             -- Display Spice
-            __reactLib.Create("UICorner", {
+            __main.__external.__reactLibrary.Create("UICorner", {
                 CornerRadius = UDim.new(0, 5)
             }),
 
-            __reactLib.Create("UIStroke", {
+            __main.__external.__reactLibrary.Create("UIStroke", {
                 Color = Color3.fromRGB(0, 255, 0),
                 ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
                 BorderStrokePosition = Enum.BorderStrokePosition.Inner,
@@ -484,7 +484,7 @@ local function InitUI()
             }),
 
             -- Inner Padding
-            __reactLib.Create("Frame", {
+            __main.__external.__reactLibrary.Create("Frame", {
                 Name = "InnerPadding",
                 AnchorPoint = Vector2.new(0.5, 0.5),
                 BackgroundTransparency = 1,
@@ -492,7 +492,7 @@ local function InitUI()
                 Position = UDim2.new(0.5, 0, 0.5, 0),
                 Size = UDim2.new(0.899999976, 0, 0.899999976, 0),
                 Children = {
-                    __reactLib.Create("TextLabel", {
+                    __main.__external.__reactLibrary.Create("TextLabel", {
                         Name = "ResultText",
                         AnchorPoint = Vector2.new(0.5, 0.5),
                         RichText = true,
@@ -505,7 +505,7 @@ local function InitUI()
                         Parent = TopbarTitleContainer
                     }),
 
-                    __reactLib.Create("ImageButton", {
+                    __main.__external.__reactLibrary.Create("ImageButton", {
                         Image = "rbxassetid://10709790644",
                         AnchorPoint = Vector2.new(0, 0.5),
                         Position = UDim2.new(0.0500000007, 0, 0.5, 0),
@@ -517,7 +517,7 @@ local function InitUI()
                         Name = "ResultIconRepresentor",
                         Parent = TopbarTitleContainer,
                         Children = {
-                            __reactLib.Create("UIAspectRatioConstraint")
+                            __main.__external.__reactLibrary.Create("UIAspectRatioConstraint")
                         }
                     })
                 }         
@@ -525,7 +525,7 @@ local function InitUI()
         }
     })
 
-    __main.__uielements.__uiTemplates["TabContainerTemplate"] = __reactLib.Create("Frame", {
+    __main.__uielements.__uiTemplates["TabContainerTemplate"] = __main.__external.__reactLibrary.Create("Frame", {
         BackgroundTransparency = 1,
         BorderSizePixel = 0,
         Size = UDim2.new(1, 0, 1, 0)
@@ -696,7 +696,7 @@ return function(...)
     local __mainSuccess = __main.__runners.__runPr(function()
         __main.__external.__services("HttpService")
 
-        local __reactLib = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/ReactLibrary.lua")
+        __main.__external.__reactLibrary = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/ReactLibrary.lua")
         InitUI()
       
     end, "__main__")
