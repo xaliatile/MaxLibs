@@ -282,7 +282,6 @@ local function __initUI()
 
     local ExitButton = __main.__external.__reactLibrary.Create("ImageButton", {
         Image = "rbxassetid://10747384394",
-        ResampleMode = Enum.ResamplerMode.Pixelated,
         ScaleType = Enum.ScaleType.Fit,
         BackgroundTransparency = 1,
         BorderSizePixel = 0,
@@ -298,14 +297,13 @@ local function __initUI()
 
     local MaximizeButton = __main.__external.__reactLibrary.Create("ImageButton", {
         Image = "rbxassetid://10734965702",
-        ResampleMode = Enum.ResamplerMode.Pixelated,
         ScaleType = Enum.ScaleType.Fit,
         BackgroundTransparency = 1,
         BorderSizePixel = 0,
         Position = UDim2.new(0.562069297, 0, 0.154254988, 0),
         Size = UDim2.new(0, 20, 0, 20),
         Name = "Exit",
-        LayoutOrder = 2,
+        LayoutOrder = 1,
         Parent = UIButtonPadding,
         Children = {
             __main.__external.__reactLibrary.Create("UIAspectRatioConstraint")
