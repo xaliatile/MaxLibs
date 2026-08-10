@@ -156,14 +156,14 @@ local function InitUI()
         Size = UDim2.new(0, 666, 0, 357),
         Parent = MainGui,
         Children = {
-            __reactLib.Create("CornerRadius" {
+            __reactLib.Create("CornerRadius", {
                 TopRightRadius = UDim.new(0, 0),
                 TopLeftRadius = UDim.new(0, 0),
                 BottomLeftRadius = UDim.new(0, 8),
                 BottomRightRadius = UDim.new(0, 8)
             }),
 
-            __reactLib.Create("UIShadow" {
+            __reactLib.Create("UIShadow", {
                 BlurRadius = UDim.new(0, 20),
                 Color = Color3.fromRGB(22.000000588595867, 22.000000588595867, 22.000000588595867)
             })
@@ -180,14 +180,14 @@ local function InitUI()
         ClipsDescendants = true,
         Parent = MainFrame,
         Children = {
-            __reactLib.Create("CornerRadius" {
+            __reactLib.Create("CornerRadius", {
                 TopRightRadius = UDim.new(0, 8),
                 TopLeftRadius = UDim.new(0, 8),
                 BottomLeftRadius = UDim.new(0, 0),
                 BottomRightRadius = UDim.new(0, 0)
             }),
 
-            __reactLib.Create("UIShadow" {
+            __reactLib.Create("UIShadow", {
                 BlurRadius = UDim.new(0, 20),
                 Color = Color3.fromRGB(22.000000588595867, 22.000000588595867, 22.000000588595867)
             })
@@ -260,7 +260,7 @@ local function InitUI()
         ClipsDescendants = true,
         Parent = UIMainButtons,
         Children = {
-            __reactLib.Create("UIListLayout" {
+            __reactLib.Create("UIListLayout", {
                 Padding = UDim.new(0.150000006, 0),
                 FillDirection = Enum.FillDirection.Horizontal,
                 HorizontalAlignment = Enum.HorizontalAlignment.Center,
@@ -351,7 +351,7 @@ local function InitUI()
         Size = UDim2.new(0, 167, 1, 0),
         Parent = InnerUI,
         Children = {
-            __reactLib.Create("CornerRadius" {
+            __reactLib.Create("CornerRadius", {
                 CornerRadius = UDim.new(0, 5)
             }),
         }
@@ -444,7 +444,7 @@ local function InitUI()
                     }),
 
                     -- Tab Icon
-                    __reactLib.Create("ImageButton" {
+                    __reactLib.Create("ImageButton", {
                         Image = "rbxassetid://10734943448",
                         AnchorPoint = Vector2.new(0, 0.5),
                         Position = UDim2.new(0.0500000007, 0, 0.5, 0),
@@ -505,7 +505,7 @@ local function InitUI()
                         Parent = TopbarTitleContainer
                     }),
 
-                    __reactLib.Create("ImageButton" {
+                    __reactLib.Create("ImageButton", {
                         Image = "rbxassetid://10709790644",
                         AnchorPoint = Vector2.new(0, 0.5),
                         Position = UDim2.new(0.0500000007, 0, 0.5, 0),
