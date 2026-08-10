@@ -205,7 +205,7 @@ local function InitUI()
         Parent = Topbar
     })
 
-    local ExitButton = __reactLib.Create("ImageButton" {
+    local ExitButton = __reactLib.Create("ImageButton", {
         Image = "rbxassetid://10747384394",
         ResampleMode = Enum.ResamplerMode.Pixelated,
         ScaleType = Enum.ScaleType.Fit,
@@ -220,7 +220,7 @@ local function InitUI()
         }
     })
 
-    local MaximizeButton = __reactLib.Create("ImageButton" {
+    local MaximizeButton = __reactLib.Create("ImageButton", {
         Image = "rbxassetid://10734965702",
         ResampleMode = Enum.ResamplerMode.Pixelated,
         ScaleType = Enum.ScaleType.Fit,
@@ -235,7 +235,7 @@ local function InitUI()
         }
     })
 
-    local MinimizeButton = __reactLib.Create("ImageButton" {
+    local MinimizeButton = __reactLib.Create("ImageButton", {
         Image = "rbxassetid://10734896206",
         ResampleMode = Enum.ResamplerMode.Pixelated,
         ScaleType = Enum.ScaleType.Fit,
@@ -295,7 +295,7 @@ local function InitUI()
         Parent = TopbarTitleContainer
     })
 
-    local AboutButton = __reactLib.Create("ImageButton" {
+    local AboutButton = __reactLib.Create("ImageButton", {
         Image = "rbxassetid://10709782497",
         AnchorPoint = Vector2.new(0, 0.5),
         Position = UDim2.new(0, 0, 0.5, 0),
