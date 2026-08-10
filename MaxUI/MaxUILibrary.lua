@@ -339,7 +339,7 @@ local function __initUI()
 
     local TopbarTitleText = __main.__external.__reactLibrary.Create("TextLabel", {
         Name = "Title",
-        Text = "Packet Jet Library"
+        Text = "Packet Jet Library",
         AnchorPoint = Vector2.new(0.5, 0.5),
         TextColor3 = Color3.fromRGB(255, 255, 255),
         BorderSizePixel = 0,
