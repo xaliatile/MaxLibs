@@ -405,7 +405,6 @@ local function __initUI()
 		Size = UDim2.new(0.940119743, 0, 0, 15),
 		FontFace = WorkSansRegular,
 		Visible = false,
-		Parent = TopbarTitleContainer
 	})
 
 	__main.__uielements.__uiTemplates["SidebarTabTemplate"] = __main.__external.__reactLibrary.Create("Frame", {
@@ -579,7 +578,7 @@ local function __initUI()
 			if __main.__external.__reactLibrary.HasIndex(AnimatableObject, "MouseButton1Up") and AnimatableObject:GetAttribute("__animClickSize") then
 				__main.__external.__reactLibrary.AddToJanitor(AnimatableObject.MouseButton1Up:Connect(function()
 					__main.__external.__services.TweenService:Create(AnimatableObject, RebuiltInfo, {
-						Size = AnimatableObject:GetAttribute("__animDefaultSize"),
+						Size = AnimatableObject:GetAttribute("__animHoverSize"),
 						Position = (AnimatableObject:GetAttribute("__animKeepPosition") and AnimatableObject.Position or (AnimatableObject:GetAttribute("__animDefaultPosition") or AnimatableObject.Position))
 					}):Play()
 				end))
