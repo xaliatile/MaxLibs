@@ -263,7 +263,7 @@ function __react.Create(__className : string, __propers : {any}, __creationCallb
             __react.__runners.__runLgFunc(
                 warn,
                 string.format(
-					"[MAX REACT :: Library]: Caught an exception in safe call | %s",
+					"[MAX REACT :: Library]: Caught an exception in .Create safe call | %s",
 					tostring(__result)
 				)
             )
@@ -329,7 +329,7 @@ function __react.ApplyProperties(__obj : Object, __propers : {any})
 		if not __succ then
 			warn(
 				string.format(
-					"[MAX REACT :: Library]: Caught an exception in safe call | %s",
+					"[MAX REACT :: Library]: Caught an exception in .ApplyProperties safe call | %s",
 					tostring(__result)
 				)
 			)
@@ -361,7 +361,7 @@ function __react.ConnectReact(__obj : Object, __signalData : {any}, __callback :
         __react.__runners.__runLgFunc(
             warn,
             string.format(
-				"[MAX REACT :: Library]: Caught an exception in safe call | %s",
+				"[MAX REACT :: Library]: Caught an exception in .ConnectReact safe call | %s",
 				tostring(__result)
 			)
         )
@@ -380,7 +380,7 @@ function __react.ConnectCustomReact(__signalData : {any})
 		__react.__runners.__runLgFunc(
             warn,
             string.format(
-				"[MAX REACT :: Library]: Caught an exception in safe call | %s",
+				"[MAX REACT :: Library]: Caught an exception in .ConnectCustomReact safe call | %s",
 				tostring(__result)
 			)
         )
