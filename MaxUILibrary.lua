@@ -80,6 +80,7 @@ local __main = {
 }
 
 local function InitUI()
+    --[[
     local Converted = {
             ["_UI"] = Instance.new("ScreenGui");
             ["_PakJet"] = Instance.new("Frame");
@@ -146,6 +147,7 @@ local function InitUI()
             ["_UIShadow3"] = Instance.new("UIShadow");
             ["_UIShadow4"] = Instance.new("UIShadow");
         }
+        ]]
     
     local WorkSansRegular = Font.fromId(12187373327, Enum.FontWeight.Regular, Enum.FontStyle.Normal)
     local WorkSansMedium = Font.fromId(12187373327, Enum.FontWeight.Medium, Enum.FontStyle.Normal)
@@ -708,7 +710,7 @@ return function(...)
         
         local __react = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/ReactLibrary.lua")
         __main.__external.__reactLibrary = __react
-        
+
         InitUI()
     end, "__main__")
 
