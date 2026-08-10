@@ -121,8 +121,8 @@ local function __getVerOutdation(__verData : {any})
 
     if not __majorComp then __verdict = true __outdationType = "__major" end
     if not __minorComp then __verdict = true __outdationType = "__minor" end
-    if not __patchComp then __verdict = true __patchComp = "__patch" end
-    if not __scriptBuildComp then __verdict = true __patchComp = "__build" end
+    if not __patchComp then __verdict = true __outdationType = "__patch" end
+    if not __scriptBuildComp then __verdict = true __outdationType = "__build" end
 
     return __verdict, __outdationType
 end
@@ -793,13 +793,17 @@ return function(...)
             )
 
             local __response = (__outdationType == "__build" and string.format(
-                "MaxLib is extremely outdated and needs to be updated / Latest Version %s | Current Version: %s",
-                __libVersion,
-                __scriptVersion
+                "MaxLib is extremely outdated and needs to be updated / Latest Version: Build: %s Ver: %s | Current Version: Build: %s Ver: %s",
+                __libBuildVer or "Build not found",
+                __libVersion or "Ver not found",
+                __main.__scriptBuild or "Build not found",
+                __main.__scriptVer or "Ver not found"
             ) or string.format(
-                "MaxLib is outdated and needs to be updated / Latest Version %s | Current Version: %s",
-                __libVersion,
-                __scriptVersion
+                "MaxLib is outdated and needs to be updated / Latest Version: Build: %s Ver: %s | Current Version: Build: %s Ver: %s",
+                __libBuildVer or "Build not found",
+                __libVersion or "Ver not found",
+                __main.__scriptBuild or "Build not found",
+                __main.__scriptVer or "Ver not found"
             ))
 
             __main.__runners.__runLgFunc(
