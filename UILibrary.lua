@@ -165,7 +165,7 @@ local function InitUI()
 
             __reactLib.Create("UIShadow" {
                 BlurRadius = UDim.new(0, 20),
-                Color = Color3.fromRGB(22.000000588595867, 22.000000588595867, 22.000000588595867),
+                Color = Color3.fromRGB(22.000000588595867, 22.000000588595867, 22.000000588595867)
             })
         }
     })
@@ -189,7 +189,7 @@ local function InitUI()
 
             __reactLib.Create("UIShadow" {
                 BlurRadius = UDim.new(0, 20),
-                Color = Color3.fromRGB(22.000000588595867, 22.000000588595867, 22.000000588595867),
+                Color = Color3.fromRGB(22.000000588595867, 22.000000588595867, 22.000000588595867)
             })
         }
     })
@@ -318,29 +318,17 @@ local function InitUI()
         BorderSizePixel = 0,
         ClipsDescendants = true,
         Position = UDim2.new(0.5, 0, 0.5, 0),
-        Size = UDim2.new(1, 0, 1, 0),
+        Size = UDim2.new(0.967879236, 0, 0.950000048, 0),
         Parent = MainFrame
     })
 
-    local InnerUIPadding = __reactLib.Create("Frame", {
-        Name = "InnerUIPadding",
-        AnchorPoint = Vector2.new(0.5, 0.5),
+    local TabsContainer = __reactLib.Create("Frame", {
+        Name = "TabsContainer",
         BackgroundTransparency = 1,
         BorderSizePixel = 0,
         ClipsDescendants = true,
-        Position = UDim2.new(0.5, 0, 0.5, 0),
-        Size = UDim2.new(0.967879236, 0, 0.950000048, 0)
-        Parent = InnerUI
-    })
-    
-    local InnerUIPadding = __reactLib.Create("Frame", {
-        Name = "InnerUIPadding",
-        AnchorPoint = Vector2.new(0.5, 0.5),
-        BackgroundTransparency = 1,
-        BorderSizePixel = 0,
-        ClipsDescendants = true,
-        Position = UDim2.new(0.5, 0, 0.5, 0),
-        Size = UDim2.new(0.967879236, 0, 0.950000048, 0)
+        Position = UDim2.new(0.284829736, 0, 0.022580646, 0),
+        Size = UDim2.new(0, 467, 0.954838693, 0),
         Parent = InnerUI
     })
 
@@ -351,17 +339,7 @@ local function InitUI()
         ClipsDescendants = true,
         Position = UDim2.new(0.284829736, 0, 0.022580646, 0),
         Size = UDim2.new(0, 467, 0.954838693, 0),
-        Parent = InnerUIPadding
-    })
-
-    local TabsContainer = __reactLib.Create("Frame", {
-        Name = "TabsContainer",
-        BackgroundTransparency = 1,
-        BorderSizePixel = 0,
-        ClipsDescendants = true,
-        Position = UDim2.new(0.284829736, 0, 0.022580646, 0),
-        Size = UDim2.new(0, 467, 0.954838693, 0),
-        Parent = InnerUIPadding
+        Parent = InnerUI
     })
 
     local TabsSidebarList = __reactLib.Create("Frame", {
@@ -371,7 +349,7 @@ local function InitUI()
         Position = UDim2.new(0, 0, 0.5, 0),
         BorderSizePixel = 0,
         Size = UDim2.new(0, 167, 1, 0),
-        Parent = InnerUIPadding,
+        Parent = InnerUI,
         Children = {
             __reactLib.Create("CornerRadius" {
                 CornerRadius = UDim.new(0, 5)
@@ -401,11 +379,10 @@ local function InitUI()
         Children = {
             __reactLib.Create("UIListLayout", {
                 Padding = UDim.new(0.00999999978, 0),
-                SortOrder = Enum.SortOrder.LayoutOrder,
+                SortOrder = Enum.SortOrder.LayoutOrder
             })
         }
     })
-
 
     __main.__uielements.__uiTemplates["TabCategoryTemplate"] = __reactLib.Create("TextLabel", {
         Name = "TabCategorySeparator",
@@ -462,7 +439,7 @@ local function InitUI()
                         TextScaled = true,
                         TextWrapped = true,
                         Position = UDim2.new(0.5, 0, 0.5, 0),
-                        Size = UDim2.new(0.633679271, 0, 0.420636326, 0)
+                        Size = UDim2.new(0.633679271, 0, 0.420636326, 0),
                         Parent = TopbarTitleContainer
                     }),
 
@@ -520,11 +497,11 @@ local function InitUI()
                         AnchorPoint = Vector2.new(0.5, 0.5),
                         RichText = true,
                         FontFace = WorkSansRegular,
-                        TextXAlignment = Enum.TextXAlignment.Left
+                        TextXAlignment = Enum.TextXAlignment.Left,
                         TextScaled = true,
                         TextWrapped = true,
                         Position = UDim2.new(0.105137385, 0, 0, 0),
-                        Size = UDim2.new(0.895, 0, 0.46, 0)
+                        Size = UDim2.new(0.895, 0, 0.46, 0),
                         Parent = TopbarTitleContainer
                     }),
 
@@ -551,9 +528,10 @@ local function InitUI()
     __main.__uielements.__uiTemplates["TabContainerTemplate"] = __reactLib.Create("Frame", {
         BackgroundTransparency = 1,
         BorderSizePixel = 0,
-        Size = UDim2.new(1, 0, 1, 0),
+        Size = UDim2.new(1, 0, 1, 0)
     })
 
+    --[[
         Converted["_About1"].AnchorPoint = Vector2.new(0.5, 0.5)
         Converted["_About1"].BackgroundColor3 = Color3.fromRGB(15.000000055879354, 15.000000055879354, 15.000000055879354)
         Converted["_About1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -706,10 +684,11 @@ local function InitUI()
 
         Converted["_UIShadow4"].BlurRadius = UDim.new(0, 20)
         Converted["_UIShadow4"].Color = Color3.fromRGB(50.000000819563866, 50.000000819563866, 50.000000819563866)
-        Converted["_UIShadow4"].Parent = Converted["_UI"]
+        Converted["_UIShadow4"].Parent = Converted["_UI"]]
 end
 
 function __main:CreateTab(__tabData : {any})
+    
 end
 
 -- Force Initiation. In order to grab __main the script must call the module to get it
