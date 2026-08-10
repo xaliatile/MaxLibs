@@ -218,7 +218,7 @@ function __react.Create(__className : string, __propers : {any}, __creationCallb
 		local __parentValue = __propers["Parent"]
 		__propers["Parent"] = nil
 
-		for __prop, __propVal in pairs(__propers) do
+		for __prop, __propVal in __propers do
 			if __prop == "Attributes" then
 				for __att, __attValue in __propVal do
 					__obj:SetAttribute(__att, __attValue)
@@ -245,7 +245,7 @@ function __react.Create(__className : string, __propers : {any}, __creationCallb
 					end
 				end
 			else
-				__obj[__prop] = __parValue
+				__obj[__prop] = __propVal
 			end
 		end
 
