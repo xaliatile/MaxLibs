@@ -754,7 +754,7 @@ return function(...)
         
         local __react, __reactGitSucc = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/ReactLibrary.lua")
         local __verData, __verGitSucc = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/MaxUI/LatestVer.lua")
-
+ 
         __main.__runners.__runIf(function()
             print("fucckckkckckc")
             __main.__runners.__runLgFunc(
@@ -767,7 +767,7 @@ return function(...)
             )
         end, (__reactGitSucc == false and __verGitSucc == false))
 
-        if __getVerOutdation() then
+        if __getVerOutdation(__verData) then
             __main.__runners.__runLgFunc(
                 warn,
                 string.format(
