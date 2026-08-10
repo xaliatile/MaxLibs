@@ -715,7 +715,7 @@ return function(...)
         print(
             string.format(
                 "[MAXUI]: MaxUI loaded successfully | Took: %s (%s)", 
-                tostring(Difference)
+                tostring(Difference),
                 (Difference >= 1 and "second(s)" or "milliseconds(s)")
             )
         )
