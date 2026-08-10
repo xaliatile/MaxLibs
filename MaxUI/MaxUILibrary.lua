@@ -45,7 +45,7 @@ local __main = {
             if not __succ then
                 warn(
                     string.format(
-                        "[MAXUI | LIB INTERNAL ERROR (getRepository)]: MaxUI experienced an internal error and was handled safely | Error: %s", 
+                        "[MAXUI | LIB INTERNAL ERROR (getRepository)]: MaxUI experienced an internal error and was handled safely / Error: %s", 
                         __result
                     )
                 )
