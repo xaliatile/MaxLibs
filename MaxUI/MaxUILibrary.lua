@@ -107,6 +107,7 @@ local function __getVerOutdation(__verData : {any})
     __scriptVersion[1] = tonumber(__scriptVersion[1])
     __scriptVersion[2] = tonumber(__scriptVersion[2])
     __scriptVersion[3] = tonumber(__scriptVersion[3])
+
     __mainLibVersion[1] = tonumber(__mainLibVersion[1])
     __mainLibVersion[2] = tonumber(__mainLibVersion[2])
     __mainLibVersion[3] = tonumber(__mainLibVersion[3])
@@ -224,7 +225,7 @@ local function __initUI()
 
             __main.__external.__reactLibrary.Create("UIShadow", {
                 BlurRadius = UDim.new(0, 20),
-                Color = Color3.fromRGB(22.000000588595867, 22.000000588595867, 22.000000588595867)
+                Color = Color3.fromRGB(0, 0, 0)
             })
         }
     })
@@ -248,7 +249,7 @@ local function __initUI()
 
             __main.__external.__reactLibrary.Create("UIShadow", {
                 BlurRadius = UDim.new(0, 20),
-                Color = Color3.fromRGB(22.000000588595867, 22.000000588595867, 22.000000588595867)
+                Color = Color3.fromRGB(0, 0, 0)
             })
         }
     })
@@ -370,6 +371,17 @@ local function __initUI()
         Parent = TopbarTitleContainer,
         Children = {
             __main.__external.__reactLibrary.Create("UIAspectRatioConstraint")
+        },
+
+        Attributes = {
+            ["__animHoverSize"] = UDim2.new(0, 22, 0, 22),
+            ["__animClickSize"] = UDim2.new(0, 13, 0, 13),
+            ["__animDefaultSize"] = UDim2.new(0, 18, 0, 18),
+            ["__anim"] = true,
+
+            ["__animTime"] = 0.5,
+            ["__animStyle"] = "Exponential",
+            ["__animDir"] = "Out"
         }
     })
 
@@ -594,6 +606,54 @@ local function __initUI()
         Size = UDim2.new(1, 0, 1, 0)
     })
 
+    __main.__external.__reactLibrary.AddToJanitor(MainGui)
+
+    for _, AnimatableObject in ipairs(MainGui:GetDescendants())
+        if AnimatableObject:IsA("UIObject") and AnimatableObject:GetAttribute("__anim") then
+            local RebuiltInfo = TweenInfo.new(
+                AnimatableObject:GetAttribute("__animTime") or 0.5,
+                Enum.EasingStyle[AnimatableObject:GetAttribute("__animStyle") or "Quad"],
+                Enum.EasingDirection[AnimatableObject:GetAttribute("__animDir") or "Out"]
+            )
+
+            if __main.__external.__reactLibrary.HasIndex(AnimatableObject, "MouseEnter") and AnimatableObject:GetAttribute("__animHoverSize") then
+                __main.__external.__reactLibrary.AddToJanitor(AnimatableObject.MouseEnter:Connect(function()
+                    __main.__external.__services.TweenService:Create(AnimatableObject, RebuiltInfo, {
+                        Size = AnimatableObject:GetAttribute("__animHoverSize"),
+                        Position = (AnimatableObject:GetAttribute("__animHoverPosition") or AnimatableObject.Position)
+                    }):Play()
+                end))
+            end
+
+            if __main.__external.__reactLibrary.HasIndex(AnimatableObject, "MouseLeave") and AnimatableObject:GetAttribute("__animHoverSize") then
+                 __main.__external.__reactLibrary.AddToJanitor(AnimatableObject.MouseLeave:Connect(function()
+                    __main.__external.__services.TweenService:Create(AnimatableObject, RebuiltInfo, {
+                        Size = AnimatableObject:GetAttribute("__animDefaultSize"),
+                        Position = (not AnimatableObject:GetAttribute("__animReturnToOrigin") and AnimatableObject.Position or and AnimatableObject:GetAttribute("__animDefaultPosition"))
+                    }):Play()
+                end))
+            end
+
+            if __main.__external.__reactLibrary.HasIndex(AnimatableObject, "MouseButton1Down") and AnimatableObject:GetAttribute("__animClickSize") then
+                 __main.__external.__reactLibrary.AddToJanitor(AnimatableObject.MouseButton1Down:Connect(function()
+                    __main.__external.__services.TweenService:Create(AnimatableObject, RebuiltInfo, {
+                        Size = AnimatableObject:GetAttribute("__animClickSize"),
+                        Position = (not AnimatableObject:GetAttribute("__animReturnToOrigin") and AnimatableObject.Position or and AnimatableObject:GetAttribute("__animClickPosition"))
+                    }):Play()
+                end))
+            end
+
+            if __main.__external.__reactLibrary.HasIndex(AnimatableObject, "MouseButton1Up") and AnimatableObject:GetAttribute("__animClickSize") then
+                 __main.__external.__reactLibrary.AddToJanitor(AnimatableObject.MouseButton1Up:Connect(function()
+                    __main.__external.__services.TweenService:Create(AnimatableObject, RebuiltInfo, {
+                        Size = AnimatableObject:GetAttribute("__animDefaultSize"),
+                        Position = (not AnimatableObject:GetAttribute("__animReturnToOrigin") and AnimatableObject.Position or and AnimatableObject:GetAttribute("__animDefaultPosition"))
+                    }):Play()
+                end))
+            end
+        end
+    end
+    
     --[[
         Converted["_About1"].AnchorPoint = Vector2.new(0.5, 0.5)
         Converted["_About1"].BackgroundColor3 = Color3.fromRGB(15.000000055879354, 15.000000055879354, 15.000000055879354)
@@ -752,6 +812,22 @@ end
 
 function __main:CreateTab(__tabData : {any})
     
+end
+
+function __main:Exit()
+    __main.__external.__reactLibrary:Exit()
+
+    local function __clearTables(Table : any)
+        for _, __tableEntry in pairs(Table) do
+            if type(__tableEntry) == "table" then
+                __clearTables(__tableEntry)
+            end
+        end
+
+        table.clear(Table)
+    end
+
+    __clearTables(__main)
 end
 
 -- Force Initiation. In order to grab __main the script must call the module to get it
