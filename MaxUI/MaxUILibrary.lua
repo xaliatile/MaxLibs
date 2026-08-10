@@ -359,7 +359,7 @@ local function __initUI()
         AnchorPoint = Vector2.new(0, 0.5),
         Position = UDim2.new(0, 0, 0.5, 0),
         Size = UDim2.new(0, 18, 0, 18),
-        ResampleMode = Enum.ResamplerMode.Pixelated,
+        ResampleMode = Enum.ResamplerMode.Default,
         ScaleType = Enum.ScaleType.Fit,
         BackgroundTransparency = 1,
         BorderSizePixel = 0,
