@@ -3,7 +3,7 @@
 local __main = {
     __db = true,
 
-    __scriptVer = "1.0.4",
+    __scriptVer = "1.0.5",
     __scriptBuild = "PA",
 
     __exeStart = os.clock(),
