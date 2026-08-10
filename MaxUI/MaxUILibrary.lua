@@ -55,13 +55,9 @@ local __main = {
         end,
 
         __runIf = function(__callback : any, __statement : any)
-            local __succ, __result = false, ""
-
-            if __statement then
-                __succ, __result = pcall(__callback)
+            if __statement and type(__callback) == "function" then
+                __callback()
             end
-
-            return __result, __succ
         end,
 
         __runLgFunc = function(__callback, __callbackStr : string)
@@ -759,9 +755,7 @@ return function(...)
         local __react, __reactGitSucc = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/ReactLibrary.lua")
         local __verData, __verGitSucc = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/MaxUI/LatestVer.lua")
 
-        if not __reactGitSuc or not __verGitSucc then
-            -- our protected call function will grab this error and print a warning statement.
-
+        __main.__runners.__runIf(function()
             __main.__runners.__runLgFunc(
                 error,
                 string.format(
@@ -770,9 +764,7 @@ return function(...)
                     tostring(__verGitSucc)
                 )
             )
-
-            return
-        end
+        end, (__reactGitSucc == false and __verGitSucc == false))
 
         if __getVerOutdation() then
             __main.__runners.__runLgFunc(
