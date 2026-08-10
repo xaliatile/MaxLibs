@@ -120,9 +120,9 @@ local function __getVerOutdation(__verData : {any})
     local __outdationType = nil
 
     if not __majorComp then __verdict = true __outdationType = "__major" end
-    if not __minorComp then __verdict = true __outdationType == "__minor" end
-    if not __patchComp then __verdict = true __patchComp == "__patch" end
-    if not __scriptBuildComp then __verdict = true __patchComp == "__build" end
+    if not __minorComp then __verdict = true __outdationType = "__minor" end
+    if not __patchComp then __verdict = true __patchComp = "__patch" end
+    if not __scriptBuildComp then __verdict = true __patchComp = "__build" end
 
     return __verdict, __outdationType
 end
