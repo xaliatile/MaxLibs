@@ -4,6 +4,7 @@ local __main = {
     __db = true,
 
     __scriptVer = "1.0.0",
+    __latestLibVer = nil,
 
     __exeStart = os.clock(),
     __uielements = {
@@ -54,6 +55,12 @@ local __main = {
             return __result, __succ
         end,
 
+        __runLgFunc = function(__callback, __callbackStr : string)
+            if type(__callback) == "function" and type(__callbackStr) == "string" then
+                __callback(__callbackStr)
+            end
+        end,
+
         __runPr = function(__callback : any, __cTag : string)
             local __succ, __result = pcall(__callback)
 
@@ -81,7 +88,37 @@ local __main = {
     }
 }
 
-local function InitUI()
+local function __getVerOutdation(__verData : {any})
+    local __testEnvVer = rawget(__verData, "TestEnvVersion")
+    local __streamVer = rawget(__verData, "Version")
+
+    local __mainVerString = (__main.__db and __testEnvVer or __streamVer)
+    __main.__latestLibVer = __mainVerString
+
+    local __scriptVersion = string.split(__main.__scriptVer, ".")
+    local __mainLibVersion = string.split(__mainVerString, ".")
+
+    __scriptVersion[1] = tonumber(__scriptVersion[1])
+    __scriptVersion[2] = tonumber(__scriptVersion[2])
+    __scriptVersion[3] = tonumber(__scriptVersion[3])
+    __mainLibVersion[1] = tonumber(__mainLibVersion[1])
+    __mainLibVersion[2] = tonumber(__mainLibVersion[2])
+    __mainLibVersion[3] = tonumber(__mainLibVersion[3])
+
+    local __majorComp = __scriptVersion[1] >= __mainLibVersion[1]
+    local __minorComp = __scriptVersion[2] >= __mainLibVersion[2]
+    local __patchComp = __scriptVersion[3] >= __mainLibVersion[3]
+
+    local __verdict = false
+
+    if not __majorComp then __verdict = true end
+    if not __minorComp then __verdict = true end
+    if not __patchComp then __verdict = true end
+
+    return __verdict
+end
+
+local function __initUI()
     --[[
     local Converted = {
             ["_UI"] = Instance.new("ScreenGui");
@@ -711,17 +748,37 @@ return function(...)
         __main.__external.__services("CoreGui")
         
         local __react, __reactGitSucc = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/ReactLibrary.lua")
+        local __verData, __verGitSucc = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/MaxUI/LatestVer.lua")
 
-        if not __reactGitSuc or not __react then
+        if not __reactGitSuc or not __react or not __verData or not __verGitSucc then
             -- our protected call function will grab this error and print a warning statement.
-            error("Failed to get MaxReact dependency")
+
+            __main.__runners.__runLgFunc(
+                error,
+                string.format(
+                    "Failed to get external dependencies | Error Info: (__reactstat: %s / __verdatastat: %s)",
+                    tostring(__reactGitSucc),
+                    tostring(__verGitSucc)
+                )
+            )
 
             return
         end
 
+        if __getVerOutdation() then
+            __main.__runners.__runLgFunc(
+                warn,
+                string.format(
+                    "MaxLib is outdated, Current Version: %s | Latest Version: %s",
+                    __main.__scriptVer,
+                    tostring(__main.__latestLibVer or "err ver not found")
+                )
+            )
+        end
+
         __main.__external.__reactLibrary = __react
 
-        InitUI()
+        __initUI()
     end, "__main__")
 
     if __mainSuccess then
