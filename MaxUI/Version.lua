@@ -1,5 +1,5 @@
 return {
-    TestEnvVersion = "2.0.0",
+    TestEnvVersion = "1.0.4",
     Version = "1.0.0",
-    LibraryBuild = "R" -- PA = Pre-Alpha, A = Alpha, B = Beta, R = Release
+    LibraryBuild = "PA" -- PA = Pre-Alpha, A = Alpha, B = Beta, R = Release
 }
