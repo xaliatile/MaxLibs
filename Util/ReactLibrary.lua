@@ -210,6 +210,14 @@ do
 	}
 end
 
+function __react.HasProperty(__obj : Object, __prop : string)
+    local __hasProp = pcall(function()
+        return __obj[__prop]
+    end)
+
+    return __hasProp
+end
+
 function __react.Create(__className : string, __propers : {any}, __creationCallback : any)
 	local __succ, __result = pcall(function()
 		local __obj = Instance.new(__className)
@@ -229,7 +237,9 @@ function __react.Create(__className : string, __propers : {any}, __creationCallb
 				end
 			elseif __prop == "Children" then
 				for _, __child in ipairs(__propVal) do
-					__child.Parent = __obj
+                    if __react.HasProperty(__child, "Parent") then
+                    	__child.Parent = __obj
+                    end
 				end
 			elseif __prop == "Events" then
 				for __signalData, __callback in __propVal do
@@ -274,7 +284,7 @@ function __react.Create(__className : string, __propers : {any}, __creationCallb
 		end 
 	end
 
-	return __result, __succ
+	return __result
 end
 
 function __react.ApplyProperties(__obj : Object, __propers : {any})
@@ -295,7 +305,9 @@ function __react.ApplyProperties(__obj : Object, __propers : {any})
 				end
 			elseif __prop == "Children" then
 				for _, __child in ipairs(__propVal) do
-					__child.Parent = __obj
+					if __react.HasProperty(__child, "Parent") then
+                    	__child.Parent = __obj
+                    end
 				end
 			elseif __prop == "Events" then
 				for __signalData, Callback in __propVal do
@@ -340,7 +352,7 @@ function __react.ApplyProperties(__obj : Object, __propers : {any})
 		end 
 	end
 
-	return __result, __succ
+	return __result
 end
 
 function __react.ConnectReact(__obj : Object, __signalData : {any}, __callback : any)
