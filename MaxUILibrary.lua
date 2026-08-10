@@ -56,13 +56,23 @@ local __main = {
             local __succ, __result = pcall(__callback)
 
             if not __succ then
-                warn(
-                    string.format(
-                        "[MAXUI | LIB INTERNAL ERROR (%s)]: MaxUI experienced an internal error and was handled safely | Error: %s", 
-                        __cTag,
-                        __result
+                if __cTag == "__main__" then
+                    warn(
+                        string.format(
+                            "[MAXUI | FATAL INTERNAL ERROR (%s)]: MaxUI experienced a fatal error and cannot continue | Error: %s", 
+                            "__main__",
+                            __result
+                        )
                     )
-                )
+                else
+                    warn(
+                        string.format(
+                            "[MAXUI | LIB INTERNAL ERROR (%s)]: MaxUI experienced an internal error and was handled safely | Error: %s", 
+                            __cTag,
+                            __result
+                        )
+                    )
+                end
             end
 
             return __succ, __result
@@ -701,15 +711,7 @@ return function(...)
       
     end, "__main__")
 
-    if not __mainSuccess then
-        warn(
-            string.format(
-                "[MAXUI | FATAL INTERNAL ERROR (%s)]: MaxUI experienced a fatal error and cannot continue | Error: %s", 
-                "__main__",
-                __result
-            )
-        )
-    else
+    if __mainSuccess then
         local Difference = os.clock() - __main.__exeStart
 
         print(
