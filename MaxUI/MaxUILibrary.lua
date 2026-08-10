@@ -228,6 +228,17 @@ local function __initUI()
 		Parent = UIButtonPadding,
 		Children = {
 			__main.__external.__reactLibrary.Create("UIAspectRatioConstraint")
+		},
+        
+        Attributes = {
+			["__animHoverSize"] = UDim2.new(0, 23, 0, 23),
+			["__animClickSize"] = UDim2.new(0, 18, 0, 18),
+			["__animDefaultSize"] = UDim2.new(0, 20, 0, 20),
+			["__anim"] = true,
+
+			["__animTime"] = 0.5,
+			["__animStyle"] = "Exponential",
+			["__animDir"] = "Out"
 		}
 	})
 
@@ -243,6 +254,17 @@ local function __initUI()
 		Parent = UIButtonPadding,
 		Children = {
 			__main.__external.__reactLibrary.Create("UIAspectRatioConstraint")
+		},
+
+        Attributes = {
+			["__animHoverSize"] = UDim2.new(0, 23, 0, 23),
+			["__animClickSize"] = UDim2.new(0, 18, 0, 18),
+			["__animDefaultSize"] = UDim2.new(0, 20, 0, 20),
+			["__anim"] = true,
+
+			["__animTime"] = 0.5,
+			["__animStyle"] = "Exponential",
+			["__animDir"] = "Out"
 		}
 	})
 
@@ -259,6 +281,17 @@ local function __initUI()
 		Parent = UIButtonPadding,
 		Children = {
 			__main.__external.__reactLibrary.Create("UIAspectRatioConstraint")
+		},
+
+        Attributes = {
+			["__animHoverSize"] = UDim2.new(0, 23, 0, 23),
+			["__animClickSize"] = UDim2.new(0, 18, 0, 18),
+			["__animDefaultSize"] = UDim2.new(0, 20, 0, 20),
+			["__anim"] = true,
+
+			["__animTime"] = 0.5,
+			["__animStyle"] = "Exponential",
+			["__animDir"] = "Out"
 		}
 	})
 
