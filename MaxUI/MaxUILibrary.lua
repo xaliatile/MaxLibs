@@ -129,75 +129,6 @@ local function __getVerOutdation(__verData : {any})
 end
 
 local function __initUI()
-    --[[
-    local Converted = {
-            ["_UI"] = Instance.new("ScreenGui");
-            ["_PakJet"] = Instance.new("Frame");
-            ["_UICorner"] = Instance.new("UICorner");
-            ["_TopBar"] = Instance.new("Frame");
-            ["_UICorner1"] = Instance.new("UICorner");
-            ["_UIFunctionButtons"] = Instance.new("Frame");
-            ["_Buttons"] = Instance.new("Frame");
-            ["_UIListLayout"] = Instance.new("UIListLayout");
-            ["_Minimize"] = Instance.new("ImageButton");
-            ["_UIAspectRatioConstraint"] = Instance.new("UIAspectRatioConstraint");
-            ["_Maximize"] = Instance.new("ImageButton");
-            ["_UIAspectRatioConstraint1"] = Instance.new("UIAspectRatioConstraint");
-            ["_Exit"] = Instance.new("ImageButton");
-            ["_UIAspectRatioConstraint2"] = Instance.new("UIAspectRatioConstraint");
-            ["_TitleContainer"] = Instance.new("Frame");
-            ["_Title"] = Instance.new("TextLabel");
-            ["_About"] = Instance.new("ImageButton");
-            ["_UIAspectRatioConstraint3"] = Instance.new("UIAspectRatioConstraint");
-            ["_UIShadow"] = Instance.new("UIShadow");
-            ["_Inner"] = Instance.new("Frame");
-            ["_Padding"] = Instance.new("Frame");
-            ["_TabsContainer"] = Instance.new("Frame");
-            ["_TabsList"] = Instance.new("Frame");
-            ["_UICorner2"] = Instance.new("UICorner");
-            ["_TabDisplayPadding"] = Instance.new("Frame");
-            ["_TabDisplays"] = Instance.new("ScrollingFrame");
-            ["_UIListLayout1"] = Instance.new("UIListLayout");
-            ["_UIShadow1"] = Instance.new("UIShadow");
-            ["_Templates"] = Instance.new("Folder");
-            ["_SeparatorTemplate"] = Instance.new("TextLabel");
-            ["_TabTemplate"] = Instance.new("Frame");
-            ["_Padding1"] = Instance.new("Frame");
-            ["_Result"] = Instance.new("TextLabel");
-            ["_ResultRepresenter"] = Instance.new("ImageLabel");
-            ["_UICorner3"] = Instance.new("UICorner");
-            ["_UIStroke"] = Instance.new("UIStroke");
-            ["_ResultTemplate"] = Instance.new("Frame");
-            ["_Padding2"] = Instance.new("Frame");
-            ["_Result1"] = Instance.new("TextLabel");
-            ["_ResultRepresenter1"] = Instance.new("ImageLabel");
-            ["_UICorner4"] = Instance.new("UICorner");
-            ["_UIStroke1"] = Instance.new("UIStroke");
-            ["_TabTemplate1"] = Instance.new("Frame");
-            ["_sUncResults"] = Instance.new("ScrollingFrame");
-            ["_UIListLayout2"] = Instance.new("UIListLayout");
-            ["_About1"] = Instance.new("Frame");
-            ["_UICorner5"] = Instance.new("UICorner");
-            ["_Inner1"] = Instance.new("Frame");
-            ["_Padding3"] = Instance.new("Frame");
-            ["_TextLabel"] = Instance.new("TextLabel");
-            ["_UIShadow2"] = Instance.new("UIShadow");
-            ["_TopBar1"] = Instance.new("Frame");
-            ["_UICorner6"] = Instance.new("UICorner");
-            ["_UIFunctionButtons1"] = Instance.new("Frame");
-            ["_Buttons1"] = Instance.new("Frame");
-            ["_Exit1"] = Instance.new("ImageButton");
-            ["_UIAspectRatioConstraint4"] = Instance.new("UIAspectRatioConstraint");
-            ["_UIListLayout3"] = Instance.new("UIListLayout");
-            ["_TitleContainer1"] = Instance.new("Frame");
-            ["_Title1"] = Instance.new("TextLabel");
-            ["_About2"] = Instance.new("ImageButton");
-            ["_UIAspectRatioConstraint5"] = Instance.new("UIAspectRatioConstraint");
-            ["_UIShadow3"] = Instance.new("UIShadow");
-            ["_UIShadow4"] = Instance.new("UIShadow");
-        }
-        ]]
-
 	local WorkSansRegular = Font.fromId(12187373327, Enum.FontWeight.Regular, Enum.FontStyle.Normal)
 	local WorkSansMedium = Font.fromId(12187373327, Enum.FontWeight.Medium, Enum.FontStyle.Normal)
 
@@ -370,8 +301,8 @@ local function __initUI()
 
 	local AboutButton = __main.__external.__reactLibrary.Create("ImageButton", {
 		Image = "rbxassetid://10709782497",
-		AnchorPoint = Vector2.new(0, 0.5),
-		Position = UDim2.new(0, 0, 0.5, 0),
+		AnchorPoint = Vector2.new(0.5, 0.5),
+		Position = UDim2.new(0.5, 0, 0.5, 0),
 		Size = UDim2.new(0, 18, 0, 18),
 		ResampleMode = Enum.ResamplerMode.Default,
 		ScaleType = Enum.ScaleType.Fit,
