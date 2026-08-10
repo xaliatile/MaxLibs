@@ -364,7 +364,7 @@ local function __initUI()
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
 		Position = UDim2.new(0, 0, 0, 0.5),
-		Size = UDim2.new(0, 18, 0, 18),
+		Size = UDim2.new(0, 22, 0, 22),
 		Parent = TopbarTitleContainer
 	})
 
@@ -385,7 +385,7 @@ local function __initUI()
 
 		Attributes = {
 			["__animHoverSize"] = UDim2.new(0, 22, 0, 22),
-			["__animClickSize"] = UDim2.new(0, 13, 0, 13),
+			["__animClickSize"] = UDim2.new(0, 15, 0, 15),
 			["__animDefaultSize"] = UDim2.new(0, 18, 0, 18),
 			["__anim"] = true,
 
