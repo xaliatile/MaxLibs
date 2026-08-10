@@ -260,53 +260,8 @@ local function __initUI()
         Parent = Topbar
     })
 
-    local ExitButton = __main.__external.__reactLibrary.Create("ImageButton", {
-        Image = "rbxassetid://10747384394",
-        ResampleMode = Enum.ResamplerMode.Pixelated,
-        ScaleType = Enum.ScaleType.Fit,
-        BackgroundTransparency = 1,
-        BorderSizePixel = 0,
-        Position = UDim2.new(0.562069297, 0, 0.154254988, 0),
-        Size = UDim2.new(0, 20, 0, 20),
-        Name = "Exit",
-        LayoutOrder = 0,
-        Children = {
-            __main.__external.__reactLibrary.Create("UIAspectRatioConstraint")
-        }
-    })
-
-    local MaximizeButton = __main.__external.__reactLibrary.Create("ImageButton", {
-        Image = "rbxassetid://10734965702",
-        ResampleMode = Enum.ResamplerMode.Pixelated,
-        ScaleType = Enum.ScaleType.Fit,
-        BackgroundTransparency = 1,
-        BorderSizePixel = 0,
-        Position = UDim2.new(0.562069297, 0, 0.154254988, 0),
-        Size = UDim2.new(0, 20, 0, 20),
-        Name = "Exit",
-        LayoutOrder = 2,
-        Children = {
-            __main.__external.__reactLibrary.Create("UIAspectRatioConstraint")
-        }
-    })
-
-    local MinimizeButton = __main.__external.__reactLibrary.Create("ImageButton", {
-        Image = "rbxassetid://10734896206",
-        ResampleMode = Enum.ResamplerMode.Pixelated,
-        ScaleType = Enum.ScaleType.Fit,
-        BackgroundTransparency = 1,
-        BorderSizePixel = 0,
-        Position = UDim2.new(0.562069297, 0, 0.154254988, 0),
-        Size = UDim2.new(0, 20, 0, 20),
-        Name = "Minimize",
-        LayoutOrder = 2,
-        Children = {
-            __main.__external.__reactLibrary.Create("UIAspectRatioConstraint")
-        }
-    })
-
     local UIButtonPadding = __main.__external.__reactLibrary.Create("Frame", {
-        Name = "UIMainButtons",
+        Name = "InnerPadding",
         AnchorPoint = Vector2.new(0.5, 0.5),
         BorderSizePixel = 0,
         BackgroundTransparency = 1,
@@ -325,6 +280,54 @@ local function __initUI()
         }
     })     
 
+    local ExitButton = __main.__external.__reactLibrary.Create("ImageButton", {
+        Image = "rbxassetid://10747384394",
+        ResampleMode = Enum.ResamplerMode.Pixelated,
+        ScaleType = Enum.ScaleType.Fit,
+        BackgroundTransparency = 1,
+        BorderSizePixel = 0,
+        Position = UDim2.new(0.562069297, 0, 0.154254988, 0),
+        Size = UDim2.new(0, 20, 0, 20),
+        Name = "Exit",
+        LayoutOrder = 0,
+        Parent = UIButtonPadding,
+        Children = {
+            __main.__external.__reactLibrary.Create("UIAspectRatioConstraint")
+        }
+    })
+
+    local MaximizeButton = __main.__external.__reactLibrary.Create("ImageButton", {
+        Image = "rbxassetid://10734965702",
+        ResampleMode = Enum.ResamplerMode.Pixelated,
+        ScaleType = Enum.ScaleType.Fit,
+        BackgroundTransparency = 1,
+        BorderSizePixel = 0,
+        Position = UDim2.new(0.562069297, 0, 0.154254988, 0),
+        Size = UDim2.new(0, 20, 0, 20),
+        Name = "Exit",
+        LayoutOrder = 2,
+        Parent = UIButtonPadding,
+        Children = {
+            __main.__external.__reactLibrary.Create("UIAspectRatioConstraint")
+        }
+    })
+
+    local MinimizeButton = __main.__external.__reactLibrary.Create("ImageButton", {
+        Image = "rbxassetid://10734896206",
+        ResampleMode = Enum.ResamplerMode.Pixelated,
+        ScaleType = Enum.ScaleType.Fit,
+        BackgroundTransparency = 1,
+        BorderSizePixel = 0,
+        Position = UDim2.new(0.562069297, 0, 0.154254988, 0),
+        Size = UDim2.new(0, 20, 0, 20),
+        Name = "Minimize",
+        LayoutOrder = 2,
+        Parent = UIButtonPadding,
+        Children = {
+            __main.__external.__reactLibrary.Create("UIAspectRatioConstraint")
+        }
+    })
+
     local TopbarTitleContainer = __main.__external.__reactLibrary.Create("Frame", {
         Name = "TitleContainer",
         AnchorPoint = Vector2.new(0, 0.5),
@@ -337,8 +340,9 @@ local function __initUI()
     })
 
     local TopbarTitleText = __main.__external.__reactLibrary.Create("TextLabel", {
-        Name = "Title",
+        Name = "Packet Jet Library",
         AnchorPoint = Vector2.new(0.5, 0.5),
+        TextColor3 = Color3.fromRGB(255, 255, 255),
         BorderSizePixel = 0,
         TextWrapped = true,
         BackgroundTransparency = 1,
