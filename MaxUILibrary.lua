@@ -151,7 +151,7 @@ local function InitUI()
     local WorkSansRegular = Font.fromId(12187373327, Enum.FontWeight.Regular, Enum.FontStyle.Normal)
     local WorkSansMedium = Font.fromId(12187373327, Enum.FontWeight.Medium, Enum.FontStyle.Normal)
 
-    local MainGui = __main.__external.__reactLibrary.Create("StarterGui", {
+    local MainGui = __main.__external.__reactLibrary.Create("ScreenGui", {
         Name = __main.__external.__services.HttpService:GenerateGUID(false),
         Parent = (__main.__db and __main.__external.__services.CoreGui or gethui()),
         IgnoreGuiInset = true
@@ -709,7 +709,6 @@ return function(...)
 
         __main.__external.__reactLibrary = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/ReactLibrary.lua")
         InitUI()
-      
     end, "__main__")
 
     if __mainSuccess then
