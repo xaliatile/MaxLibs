@@ -839,6 +839,8 @@ return function(...)
 		__main.__external.__services("CoreGui")
 		__main.__external.__services("TweenService")
 
+		print(__main.__external.__services.TweenService)
+
 		local __react, __reactGitSucc = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/Util/ReactLibrary.lua")
 		local __verData, __verGitSucc = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/MaxUI/Version.lua")
 
