@@ -213,12 +213,12 @@ end
 function __react.Create(__className : string, __propers : {any}, __creationCallback : any)
 	local __succ, __result = pcall(function()
 		local __obj = Instance.new(__className)
-		__propers = __propers and __propers or {}
+		__propers = (__propers and __propers or {})
 
 		local __parValue = __propers["Parent"]
 		__propers["Parent"] = nil
 
-		for __prop, __propVal in __propers do
+		for __prop, __propVal in pairs(__propers) do
 			if __prop == "Attributes" then
 				for __att, __attValue in __propVal do
 					__obj:SetAttribute(__att, __attValue)
