@@ -301,7 +301,7 @@ local function __initUI()
         BackgroundTransparency = 1,
         BorderSizePixel = 0,
         Position = UDim2.new(0.562069297, 0, 0.154254988, 0),
-        Size = UDim2.new(0, 18, 0, 18) -- smaller offset to fit into the other button sizes.,
+        Size = UDim2.new(0, 18, 0, 18), -- smaller offset to fit into the other button sizes.,
         Name = "Maximize",
         LayoutOrder = 1,
         Parent = UIButtonPadding,
