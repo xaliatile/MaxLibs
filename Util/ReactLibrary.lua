@@ -432,9 +432,9 @@ do
     __react.__runners.__runLgFunc(
         print,
         string.format(
-            "[MAX REACT :: Library]: Max react initialized successfully | Time Took: %s %s",
+            "[MAX REACT :: Library]: Max react initialized successfully | Took: %s %s",
             tostring(Difference),
-            (Difference >= 1 and "second(s)" or "milliseconds(s)")
+            (Difference >= 1 and "second(s)" or "millisecond(s)")
         )
     )
 end
