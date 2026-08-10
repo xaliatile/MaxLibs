@@ -761,7 +761,7 @@ return function(...)
         __main.__external.__services("CoreGui")
         
         local __react, __reactGitSucc = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/Util/ReactLibrary.lua")
-        local __verData, __verGitSucc = __main.__runners.__getRepository("hhttps://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/MaxUI/Version.lua")
+        local __verData, __verGitSucc = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/MaxUI/Version.lua")
  
         __main.__runners.__runIf(function()
             __main.__runners.__runLgFunc(
