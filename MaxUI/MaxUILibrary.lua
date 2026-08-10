@@ -231,8 +231,8 @@ local function __initUI()
 		},
         
         Attributes = {
-			["__animHoverSize"] = UDim2.new(0, 23, 0, 23),
-			["__animClickSize"] = UDim2.new(0, 18, 0, 18),
+			["__animHoverSize"] = UDim2.new(0, 25, 0, 25),
+			["__animClickSize"] = UDim2.new(0, 17, 0, 17),
 			["__animDefaultSize"] = UDim2.new(0, 20, 0, 20),
 			["__anim"] = true,
 
@@ -257,8 +257,8 @@ local function __initUI()
 		},
 
         Attributes = {
-			["__animHoverSize"] = UDim2.new(0, 23, 0, 23),
-			["__animClickSize"] = UDim2.new(0, 18, 0, 18),
+			["__animHoverSize"] = UDim2.new(0, 25, 0, 25),
+			["__animClickSize"] = UDim2.new(0, 17, 0, 17),
 			["__animDefaultSize"] = UDim2.new(0, 20, 0, 20),
 			["__anim"] = true,
 
@@ -284,8 +284,8 @@ local function __initUI()
 		},
 
         Attributes = {
-			["__animHoverSize"] = UDim2.new(0, 23, 0, 23),
-			["__animClickSize"] = UDim2.new(0, 18, 0, 18),
+			["__animHoverSize"] = UDim2.new(0, 25, 0, 25),
+			["__animClickSize"] = UDim2.new(0, 17, 0, 17),
 			["__animDefaultSize"] = UDim2.new(0, 20, 0, 20),
 			["__anim"] = true,
 
