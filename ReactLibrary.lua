@@ -416,7 +416,6 @@ do
         print,
         string.format(
             "[MAX REACT :: Library]: Max react initialized successfully | Time Took: %s %s",
-            tostring(__result),
             tostring(Difference),
             (Difference >= 1 and "second(s)" or "milliseconds(s)")
         )
