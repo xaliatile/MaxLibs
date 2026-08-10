@@ -445,7 +445,7 @@ local function __initUI()
             }),
 
             __main.__external.__reactLibrary.Create("UIPadding", {
-                PaddingRight = UDim.new(0, 8),
+                PaddingRight = UDim.new(0, 8)
             })
         }
     })
