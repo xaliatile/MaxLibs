@@ -1,6 +1,7 @@
 -- Made by Max
 
 local __react = {
+    __reactExeTime = os.clock(),
 	__signals = {},
 	__reactpool = setmetatable({
 		__pool = {}
@@ -68,6 +69,12 @@ local __react = {
 
 			return __result, __succ
 		end,
+
+        __runLgFunc = function(__callback, __callbackStr : string)
+            if type(__callback) == "function" and type(__callbackStr) == "string" then
+                __callback(__callbackStr)
+            end
+        end,
 
 		__runPr = function(__callback : any, __cTag : string)
 			local __succ, __result = pcall(__callback)
@@ -253,12 +260,13 @@ function __react.Create(__className : string, __propers : {any}, __creationCallb
 		end
 	else
 		if not __succ then
-			warn(
-				string.format(
+            __react.__runners.__runLgFunc(
+                warn,
+                string.format(
 					"[MAX REACT :: Library]: Caught an exception in safe call | %s",
 					tostring(__result)
 				)
-			)
+            )
 		end 
 	end
 
@@ -349,12 +357,13 @@ function __react.ConnectReact(__obj : Object, __signalData : {any}, __callback :
 	end)
 
 	if not __succ then
-		warn(
-			string.format(
-				"[REACT LIB :: Library]: Caught an exception in safe call | %s",
+        __react.__runners.__runLgFunc(
+            warn,
+            string.format(
+				"[MAX REACT :: Library]: Caught an exception in safe call | %s",
 				tostring(__result)
 			)
-		)
+        )
 	end
 
 	return __result, __succ
@@ -367,12 +376,13 @@ function __react.ConnectCustomReact(__signalData : {any})
 	end)
 
 	if not __succ then
-		warn(
-			string.format(
-				"[REACT LIB :: Library]: Caught an exception in safe call | %s",
+		__react.__runners.__runLgFunc(
+            warn,
+            string.format(
+				"[MAX REACT :: Library]: Caught an exception in safe call | %s",
 				tostring(__result)
 			)
-		)
+        )
 	end
 
 	return __result, __succ
@@ -399,6 +409,18 @@ function __react.Exit()
 	__react = nil
 end
 
-print("hekl")
+do
+    local Difference = os.clock() - __react.__reactExeTime
+
+    __react.__runners.__runLgFunc(
+        print,
+        string.format(
+            "[MAX REACT :: Library]: Max react initialized successfully | Time Took: %s %s",
+            tostring(__result),
+            tostring(Difference),
+            (Difference >= 1 and "second(s)" or "milliseconds(s)")
+        )
+    )
+end
 
 return __react
