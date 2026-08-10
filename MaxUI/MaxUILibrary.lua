@@ -476,7 +476,7 @@ local function __initUI()
             __main.__external.__reactLibrary.Create("UIStroke", {
                 Color = Color3.fromRGB(155.00000596046448, 155.00000596046448, 155.00000596046448),
                 ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-                BorderStrokePosition = Enum.BorderStrokePosition.Inner,
+                BorderStrokePosition = Enum.BorderStrokePosition.Center,
                 BorderOffset = UDim.new(0, -3)
             }),
 
@@ -538,7 +538,7 @@ local function __initUI()
             __main.__external.__reactLibrary.Create("UIStroke", {
                 Color = Color3.fromRGB(0, 255, 0),
                 ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual,
-                BorderStrokePosition = Enum.BorderStrokePosition.Inner,
+                BorderStrokePosition = Enum.BorderStrokePosition.Center,
                 BorderOffset = UDim.new(0, -3)
             }),
 
