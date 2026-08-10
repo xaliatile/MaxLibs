@@ -312,7 +312,7 @@ function __react.ApplyProperties(__obj : Object, __propers : {any})
 					end
 				end
 			else
-				__obj[__prop] = __parValue
+				__obj[__prop] = __propVal
 			end
 		end
 
