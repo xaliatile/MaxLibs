@@ -267,7 +267,7 @@ local function __initUI()
 		AnchorPoint = Vector2.new(0, 0.5),
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
-		Position = UDim2.new(0, 20, 0, 23),
+		Position = UDim2.new(0, 13, 0, 23),
 		Size = UDim2.new(0, 201, 0, 15),
 		ClipsDescendants = false,
 		Parent = Topbar
