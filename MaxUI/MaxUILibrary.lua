@@ -77,14 +77,14 @@ local __main = {
                 if __cTag == "main" then
                     warn(
                         string.format(
-                            "[MAXUI | FATAL INTERNAL ERROR (main)]: MaxUI experienced a fatal error and cannot continue | Error: %s", 
+                            "[MAXUI | FATAL INTERNAL ERROR (main)]: MaxUI experienced a fatal error and cannot continue / Error: %s", 
                             __result
                         )
                     )
                 else
                     warn(
                         string.format(
-                            "[MAXUI | LIB INTERNAL ERROR (%s)]: MaxUI experienced an internal error and was handled safely | Error: %s", 
+                            "[MAXUI | LIB INTERNAL ERROR (%s)]: MaxUI experienced an internal error and was handled safely / Error: %s", 
                             __cTag,
                             __result
                         )
