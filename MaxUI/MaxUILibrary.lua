@@ -357,6 +357,16 @@ local function __initUI()
 		FontFace = WorkSansMedium,
 		Parent = TopbarTitleContainer
 	})
+    
+    local AboutButtonPadding = __main.__external.__reactLibrary.Create("Frame", {
+		Name = "AboutPadding",
+		AnchorPoint = Vector2.new(0, 0.5),
+		BorderSizePixel = 0,
+		BackgroundTransparency = 1,
+		Position = UDim2.new(0, 0, 0, 0.5),
+		Size = UDim2.new(0, 18, 0, 18),
+		Parent = TopbarTitleContainer
+	})
 
 	local AboutButton = __main.__external.__reactLibrary.Create("ImageButton", {
 		Image = "rbxassetid://10709782497",
@@ -368,7 +378,7 @@ local function __initUI()
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		Name = "About",
-		Parent = TopbarTitleContainer,
+		Parent = AboutButtonPadding,
 		Children = {
 			__main.__external.__reactLibrary.Create("UIAspectRatioConstraint")
 		},
@@ -838,8 +848,6 @@ return function(...)
 		__main.__external.__services("HttpService")
 		__main.__external.__services("CoreGui")
 		__main.__external.__services("TweenService")
-
-		print(__main.__external.__services.TweenService)
 
 		local __react, __reactGitSucc = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/Util/ReactLibrary.lua")
 		local __verData, __verGitSucc = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/MaxUI/Version.lua")
