@@ -442,7 +442,7 @@ local function __initUI()
             __main.__external.__reactLibrary.Create("UIListLayout", {
                 Padding = UDim.new(0.00999999978, 0),
                 SortOrder = Enum.SortOrder.LayoutOrder
-            })
+            }),
 
             __main.__external.__reactLibrary.Create("UIPadding", {
                 PaddingRight = UDim.new(0, 8),
