@@ -211,7 +211,7 @@ local function __initUI()
         Size = UDim2.new(0, 666, 0, 357),
         Parent = MainGui,
         Children = {
-            __main.__external.__reactLibrary.Create("CornerRadius", {
+            __main.__external.__reactLibrary.Create("UICorner", {
                 TopRightRadius = UDim.new(0, 0),
                 TopLeftRadius = UDim.new(0, 0),
                 BottomLeftRadius = UDim.new(0, 8),
@@ -235,7 +235,7 @@ local function __initUI()
         ClipsDescendants = true,
         Parent = MainFrame,
         Children = {
-            __main.__external.__reactLibrary.Create("CornerRadius", {
+            __main.__external.__reactLibrary.Create("UICorner", {
                 TopRightRadius = UDim.new(0, 8),
                 TopLeftRadius = UDim.new(0, 8),
                 BottomLeftRadius = UDim.new(0, 0),
@@ -406,7 +406,7 @@ local function __initUI()
         Size = UDim2.new(0, 167, 1, 0),
         Parent = InnerUI,
         Children = {
-            __main.__external.__reactLibrary.Create("CornerRadius", {
+            __main.__external.__reactLibrary.Create("UICorner", {
                 CornerRadius = UDim.new(0, 5)
             }),
         }
@@ -765,7 +765,7 @@ return function(...)
                 )
             )
         end, (__reactGitSucc == false and __verGitSucc == false))
-        
+
         if __getVerOutdation(__verData) then
             __main.__runners.__runLgFunc(
                 warn,
