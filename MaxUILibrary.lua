@@ -708,7 +708,15 @@ return function(...)
         __main.__external.__services("HttpService")
         __main.__external.__services("CoreGui")
         
-        local __react = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/ReactLibrary.lua")
+        local __react, __reactGitSucc = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/ReactLibrary.lua")
+
+        if not __reactGitSuc or not __react then
+            -- our protected call function will grab this error and print a warning statement.
+            error("Failed to get MaxReact dependency")
+
+            return
+        end
+
         __main.__external.__reactLibrary = __react
 
         InitUI()
