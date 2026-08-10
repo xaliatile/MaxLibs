@@ -288,7 +288,7 @@ local function __initUI()
         Position = UDim2.new(0.562069297, 0, 0.154254988, 0),
         Size = UDim2.new(0, 20, 0, 20),
         Name = "Exit",
-        LayoutOrder = 0,
+        LayoutOrder = 2,
         Parent = UIButtonPadding,
         Children = {
             __main.__external.__reactLibrary.Create("UIAspectRatioConstraint")
@@ -319,7 +319,7 @@ local function __initUI()
         Position = UDim2.new(0.562069297, 0, 0.154254988, 0),
         Size = UDim2.new(0, 20, 0, 20),
         Name = "Minimize",
-        LayoutOrder = 2,
+        LayoutOrder = 0,
         Parent = UIButtonPadding,
         Children = {
             __main.__external.__reactLibrary.Create("UIAspectRatioConstraint")
