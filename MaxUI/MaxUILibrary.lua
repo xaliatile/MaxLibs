@@ -137,7 +137,7 @@ local function __initUI()
 		["__animClickSize"] = UDim2.new(0, 17, 0, 17),
 		["__animDefaultSize"] = UDim2.new(0, 20, 0, 20),
 		["__anim"] = true,
-		["__animTime"] = 0.5,
+		["__animTime"] = 0.2,
 		["__animStyle"] = "Exponential",
 		["__animDir"] = "Out"
 	}
@@ -262,9 +262,9 @@ local function __initUI()
             ["__animClickSize"] = UDim2.new(0, 15, 0, 15),
             ["__animDefaultSize"] = UDim2.new(0, 18, 0, 18),
             ["__anim"] = true,
-            ["__animTime"] = 0.5,
-            ["__animStyle"] = "Exponential",
-            ["__animDir"] = "Out"
+            ["__animTime"] = DefaultAnimAttributes.__animTime,
+            ["__animStyle"] = DefaultAnimAttributes.__animStyle,
+            ["__animDir"] = DefaultAnimAttributes.__animDir
         }
 	})
 
