@@ -3,6 +3,8 @@
 local __main = {
     __db = true,
 
+    __scriptVer = "1.0.0",
+
     __exeStart = os.clock(),
     __uielements = {
         __uiTemplates = {},
