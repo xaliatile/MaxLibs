@@ -615,8 +615,9 @@ local function __initUI()
 				Enum.EasingStyle[AnimatableObject:GetAttribute("__animStyle") or "Quad"],
 				Enum.EasingDirection[AnimatableObject:GetAttribute("__animDir") or "Out"]
 			)
-
-            local KeepsOffset = AnimatableObject:GetAttribute("__animKeepPosition") and true or false
+            
+            print("hjhfdhff")
+            local KeepsOffset = AnimatableObject:GetAttribute("__animKeepPosition") or false
 
 			if __main.__external.__reactLibrary.HasIndex(AnimatableObject, "MouseEnter") and AnimatableObject:GetAttribute("__animHoverSize") then
 				__main.__external.__reactLibrary.AddToJanitor(AnimatableObject.MouseEnter:Connect(function()
