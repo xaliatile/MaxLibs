@@ -765,9 +765,7 @@ return function(...)
                 )
             )
         end, (__reactGitSucc == false and __verGitSucc == false))
-
-        print('so steuipid')
-
+        
         if __getVerOutdation(__verData) then
             __main.__runners.__runLgFunc(
                 warn,
@@ -782,14 +780,14 @@ return function(...)
         __main.__external.__reactLibrary = __react
 
         __initUI()
-    end, "__main__")
+    end, "main")
 
     if __mainSuccess then
         local Difference = os.clock() - __main.__exeStart
 
         print(
             string.format(
-                "[MAXUI]: MaxUI loaded successfully | Took: %s (%s)", 
+                "[MAXUI]: MaxUI loaded successfully | Took: %s %s", 
                 tostring(Difference),
                 (Difference >= 1 and "second(s)" or "milliseconds(s)")
             )
