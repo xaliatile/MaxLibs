@@ -765,7 +765,7 @@ return function(...)
             __main.__runners.__runLgFunc(
                 error,
                 string.format(
-                    "Failed to get external dependencies | Error Info: (__reactstat: %s / __verdatastat: %s)",
+                    "Failed to get external dependencies, dependencies were either not found or have been changed | Error Info: (__reactstat: %s / __verdatastat: %s)",
                     tostring(__reactGitSucc),
                     tostring(__verGitSucc)
                 )
