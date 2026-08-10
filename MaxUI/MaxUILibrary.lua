@@ -3,7 +3,7 @@
 local __main = {
     __db = true,
 
-    __scriptVer = "1.0.3",
+    __scriptVer = "1.0.4",
     __scriptBuild = "PA",
 
     __exeStart = os.clock(),
@@ -779,7 +779,7 @@ return function(...)
             local __testEnvVer = rawget(__verData, "TestEnvVersion")
             local __streamVer = rawget(__verData, "Version")
             local __libBuildVer = rawget(__verData, "LibraryBuild")
-            
+
             local __libVersion = (__main.__db and __testEnvVer or __streamVer)
 
             local __response = (__outdationType == "__build" and string.format(
