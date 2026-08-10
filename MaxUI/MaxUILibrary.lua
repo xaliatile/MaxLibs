@@ -3,7 +3,7 @@
 local __main = {
     __db = true,
 
-    __scriptVer = "1.0.0",
+    __scriptVer = "1.0.1",
     __latestLibVer = nil,
 
     __exeStart = os.clock(),
@@ -41,6 +41,15 @@ local __main = {
                 local __repo = game:HttpGet(__repoLink)
                 return loadstring(__repo)()
             end)
+
+            if not __succ then
+                warn(
+                    string.format(
+                        "[MAXUI | LIB INTERNAL ERROR (getRepository)]: MaxUI experienced an internal error and was handled safely | Error: %s", 
+                        __result
+                    )
+                )
+            end
 
             return __result, __succ
         end,
