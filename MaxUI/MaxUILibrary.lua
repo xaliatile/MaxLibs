@@ -608,7 +608,7 @@ local function __initUI()
 
     __main.__external.__reactLibrary.AddToJanitor(MainGui)
 
-    for _, AnimatableObject in ipairs(MainGui:GetDescendants())
+    for _, AnimatableObject in ipairs(MainGui:GetDescendants()) do
         if AnimatableObject:IsA("UIObject") and AnimatableObject:GetAttribute("__anim") then
             local RebuiltInfo = TweenInfo.new(
                 AnimatableObject:GetAttribute("__animTime") or 0.5,
