@@ -756,6 +756,7 @@ return function(...)
         local __verData, __verGitSucc = __main.__runners.__getRepository("https://raw.githubusercontent.com/xaliatile/MaxLibs/refs/heads/main/MaxUI/LatestVer.lua")
 
         __main.__runners.__runIf(function()
+            print("fucckckkckckc")
             __main.__runners.__runLgFunc(
                 error,
                 string.format(
