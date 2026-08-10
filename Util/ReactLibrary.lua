@@ -277,7 +277,8 @@ function __react.ApplyProperties(__obj : Object, __propers : {any})
 	local __succ, __result = pcall(function()
 		__propers = __propers and __propers or {}
 
-		local __parValue = __propers["Parent"]
+		local __parentValue = __propers["Parent"]
+		__propers["Parent"] = nil
 
 		if __parValue == nil and rawget(__propers, "Parent") == nil then
 			__parValue = __obj.Parent
@@ -315,8 +316,8 @@ function __react.ApplyProperties(__obj : Object, __propers : {any})
 			end
 		end
 
-		if __parValue then
-			__obj.Parent = __parValue
+		if __parentValue then
+			__obj.Parent = __parentValue
 		end
 	end)
 
