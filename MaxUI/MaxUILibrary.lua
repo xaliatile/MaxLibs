@@ -132,6 +132,16 @@ local function __initUI()
 	local WorkSansRegular = Font.fromId(12187373327, Enum.FontWeight.Regular, Enum.FontStyle.Normal)
 	local WorkSansMedium = Font.fromId(12187373327, Enum.FontWeight.Medium, Enum.FontStyle.Normal)
 
+    local DefaultAnimAttributes = {
+		["__animHoverSize"] = UDim2.new(0, 25, 0, 25),
+		["__animClickSize"] = UDim2.new(0, 17, 0, 17),
+		["__animDefaultSize"] = UDim2.new(0, 20, 0, 20),
+		["__anim"] = true,
+		["__animTime"] = 0.5,
+		["__animStyle"] = "Exponential",
+		["__animDir"] = "Out"
+	}
+
 	local MainGui = __main.__external.__reactLibrary.Create("ScreenGui", {
 		Name = __main.__external.__services.HttpService:GenerateGUID(false),
 		Parent = (__main.__db and __main.__external.__services.CoreGui or gethui()),
@@ -230,16 +240,7 @@ local function __initUI()
 			__main.__external.__reactLibrary.Create("UIAspectRatioConstraint")
 		},
         
-        Attributes = {
-			["__animHoverSize"] = UDim2.new(0, 25, 0, 25),
-			["__animClickSize"] = UDim2.new(0, 17, 0, 17),
-			["__animDefaultSize"] = UDim2.new(0, 20, 0, 20),
-			["__anim"] = true,
-
-			["__animTime"] = 0.5,
-			["__animStyle"] = "Exponential",
-			["__animDir"] = "Out"
-		}
+        Attributes = DefaultAnimAttributes
 	})
 
 	local MaximizeButton = __main.__external.__reactLibrary.Create("ImageButton", {
@@ -257,15 +258,14 @@ local function __initUI()
 		},
 
         Attributes = {
-			["__animHoverSize"] = UDim2.new(0, 25, 0, 25),
-			["__animClickSize"] = UDim2.new(0, 17, 0, 17),
-			["__animDefaultSize"] = UDim2.new(0, 20, 0, 20),
-			["__anim"] = true,
-
-			["__animTime"] = 0.5,
-			["__animStyle"] = "Exponential",
-			["__animDir"] = "Out"
-		}
+            ["__animHoverSize"] = UDim2.new(0, 23, 0, 23),
+            ["__animClickSize"] = UDim2.new(0, 15, 0, 15),
+            ["__animDefaultSize"] = UDim2.new(0, 18, 0, 18),
+            ["__anim"] = true,
+            ["__animTime"] = 0.5,
+            ["__animStyle"] = "Exponential",
+            ["__animDir"] = "Out"
+        }
 	})
 
 	local MinimizeButton = __main.__external.__reactLibrary.Create("ImageButton", {
@@ -283,16 +283,7 @@ local function __initUI()
 			__main.__external.__reactLibrary.Create("UIAspectRatioConstraint")
 		},
 
-        Attributes = {
-			["__animHoverSize"] = UDim2.new(0, 25, 0, 25),
-			["__animClickSize"] = UDim2.new(0, 17, 0, 17),
-			["__animDefaultSize"] = UDim2.new(0, 20, 0, 20),
-			["__anim"] = true,
-
-			["__animTime"] = 0.5,
-			["__animStyle"] = "Exponential",
-			["__animDir"] = "Out"
-		}
+        Attributes = DefaultAnimAttributes
 	})
 
 	local TopbarTitleContainer = __main.__external.__reactLibrary.Create("Frame", {
@@ -347,16 +338,7 @@ local function __initUI()
 			__main.__external.__reactLibrary.Create("UIAspectRatioConstraint")
 		},
 
-		Attributes = {
-			["__animHoverSize"] = UDim2.new(0, 22, 0, 22),
-			["__animClickSize"] = UDim2.new(0, 15, 0, 15),
-			["__animDefaultSize"] = UDim2.new(0, 18, 0, 18),
-			["__anim"] = true,
-
-			["__animTime"] = 0.5,
-			["__animStyle"] = "Exponential",
-			["__animDir"] = "Out"
-		}
+		Attributes = DefaultAnimAttributes
 	})
 
 	local InnerUI = __main.__external.__reactLibrary.Create("Frame", {
@@ -390,7 +372,7 @@ local function __initUI()
 		Parent = InnerUI,
 		Children = {
 			__main.__external.__reactLibrary.Create("UICorner", {
-				CornerRadius = UDim.new(0, 5)
+				CornerRadius = UDim.new(0, 6)
 			}),
 		}
 	})
