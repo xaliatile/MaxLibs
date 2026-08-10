@@ -1,4 +1,4 @@
 return {
-    TestEnvVersion = "1.0.0",
+    TestEnvVersion = "1.0.1",
     Version = "1.0.0"
 }
